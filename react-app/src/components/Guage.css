@@ -1,0 +1,34 @@
+svg#Guage {
+  width: 100%;
+  height: 100%;
+  --base-hue: 220;
+}
+
+svg#Guage #background-circle {
+  fill: hsla(var(--base-hue), 100%, 25%, 0.25);
+  stroke: hsl(var(--base-hue), 100%, 75%);
+  stroke-width: 1;
+}
+
+svg#Guage #range {
+  fill: hsl(var(--base-hue), 100%, 15%);
+  stroke: hsl(var(--base-hue), 100%, 75%);
+}
+
+svg#Guage #needle {
+  fill: hsl(calc(var(--base-hue) - 210), 100%, 50%);
+  stroke: hsl(calc(var(--base-hue) - 180), 100%, 50%);
+}
+
+svg#Guage text {
+  text-anchor: middle;
+}
+
+svg#Guage text#value {
+  fill: hsl(calc(var(--base-hue) - 180), 100%, 50%);
+  font-weight: bold;
+}
+
+svg#Guage text#title {
+  fill: hsl(var(--base-hue), 100%, 75%);
+}

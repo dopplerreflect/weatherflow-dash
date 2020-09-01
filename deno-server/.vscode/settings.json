@@ -1,0 +1,11 @@
+{
+  "deno.enable": true,
+  "deno.unstable": true,
+  "svg.preview.background": "custom",
+  "[typescript]": {
+    "editor.defaultFormatter": "denoland.vscode-deno"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "denoland.vscode-deno"
+  }
+}

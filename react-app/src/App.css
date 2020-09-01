@@ -1,0 +1,18 @@
+html,
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+:root {
+  --base-hue: 220;
+}
+#App {
+  height: 100vh;
+  background-color: hsl(var(--base-hue), 100%, 5%);
+}
+
+#RangeControl {
+  margin: 0;
+  width: 100%;
+  display: block;
+}
