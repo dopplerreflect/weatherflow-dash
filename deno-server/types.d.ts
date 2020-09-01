@@ -30,7 +30,21 @@ export interface WfRapidWind {
   ob: number[];
 }
 
-export type WfMessageObj = WfObsSt | WfRapidWind;
+export interface WfEvtStrike {
+  serial_number: string;
+  type: "evt_strike";
+  hub_sn: string;
+  evt: number[];
+  source: string;
+  device_id: number;
+}
+
+export interface WfAck {
+  type: "ack";
+  id: string;
+}
+
+export type WfMessageObj = WfAck | WfObsSt | WfRapidWind | WfEvtStrike;
 
 export type WfData = {
   summary: object;

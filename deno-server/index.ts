@@ -15,7 +15,7 @@ listenAndServe({ port: 3001 }, async (req) => {
       req.respond({ body });
       break;
     case "/favicon.ico":
-      body = await Deno.readTextFile("../react-app/build/favicon.svg");
+      body = await Deno.readTextFile("../react-app/dist/favicon.svg");
       headers.set("content-type", "image/svg+xml");
       req.respond({ body, headers });
       break;
@@ -35,7 +35,7 @@ listenAndServe({ port: 3001 }, async (req) => {
       const ext = match && match[1];
       if (ext) headers.set("content-type", mimeTypes[ext]);
       try {
-        body = await Deno.readTextFile(`../react-app/build/${req.url}`);
+        body = await Deno.readTextFile(`../react-app/dist/${req.url}`);
       } catch (e) {
         console.error(body, e);
       }

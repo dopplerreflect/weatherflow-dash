@@ -18,10 +18,39 @@ type WfSummary = {
   pulse_adj_ob_wind_avg: number;
   pulse_adj_ob_temp: number;
 };
+type DecodedRapidWind = [
+  {
+    time: number;
+    mps: number;
+    dir: number;
+  },
+];
+type DecodedObsSt = [
+  {
+    time: number;
+    windLull: number;
+    windAvg: number;
+    windGust: number;
+    windDirection: number;
+    windSampleInterval: number;
+    stationPressure: number;
+    airTemperature: number;
+    relativeHumidity: number;
+    illuminance: number;
+    uv: number;
+    solarRadiation: number;
+    precipAccumulated: number;
+    precipType: number;
+    lightningStrikeAvgDistance: number;
+    lightningStrikeCount: number;
+    battery: number;
+    reportInterval: number;
+  },
+];
 type SocketState = {
   summary: WfSummary;
-  obs_st: number[][];
-  rapid_wind: number[][];
+  obs_st: DecodedObsSt;
+  rapid_wind: DecodedRapidWind;
 };
 type SetSocketStateProps = {
   setValue: React.Dispatch<React.SetStateAction<SocketState>>;

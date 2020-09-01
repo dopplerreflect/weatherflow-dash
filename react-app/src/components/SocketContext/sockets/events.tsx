@@ -1,4 +1,8 @@
 import { joinChannel } from "./emit";
+import {
+  decodeRapidWind,
+  decodeObsSt,
+} from "../../../utils/decodeWeatherflowObjects";
 const SOCKET_SERVER = "ws://localhost:3001/ws";
 
 export let socket: WebSocket;
@@ -22,16 +26,33 @@ export const socketEvents = ({ setValue }: SetSocketStateProps) => {
     };
     socket.onmessage = (socketMessage) => {
       const message = JSON.parse(socketMessage.data);
-      console.log(message);
       switch (message.type) {
         case "all":
-          setValue(message.data);
+          setValue(
+            {
+              summary: message.data.summary,
+              obs_st: message.data.obs_st.map((e: any) => decodeObsSt(e)),
+              rapid_wind: message.data.rapid_wind.map((e: any) =>
+                decodeRapidWind(e)
+              ),
+            },
+          );
           break;
         case "rapid_wind":
-          setValue((state) => ({ ...state, rapid_wind: message.rapid_wind }));
+          setValue((state) => ({
+            ...state,
+            rapid_wind: message.rapid_wind.map((rw: any) =>
+              decodeRapidWind(message.rapid_wind)
+            ),
+          }));
           break;
         case "obs_st":
-          setValue((state) => ({ ...state, obs_st: message.obs_st }));
+          setValue((state) => ({
+            ...state,
+            obs_st: message.obs_st.map((rw: any) =>
+              decodeObsSt(message.obs_st[0])
+            ),
+          }));
           break;
         case "summary":
           setValue((state) => ({ ...state, summary: message.summary }));

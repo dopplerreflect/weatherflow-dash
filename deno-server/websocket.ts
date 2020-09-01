@@ -57,7 +57,11 @@ wsClient.on("message", async function (message: string) {
   const messageObj: WfMessageObj = JSON.parse(message);
   console.log(
     messageObj.type,
-    messageObj.type === "obs_st" ? messageObj.obs[0] : messageObj.ob,
+    messageObj.type === "obs_st"
+      ? messageObj.obs[0]
+      : messageObj.type === "rapid_wind"
+      ? messageObj.ob
+      : messageObj,
   );
   switch (messageObj.type) {
     case "rapid_wind":
