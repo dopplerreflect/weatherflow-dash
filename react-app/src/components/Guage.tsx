@@ -10,9 +10,10 @@ const calcXY = (angle: number, radius = 50, center = 128) => {
 type Props = {
   percent: number;
   title: string;
+  unit?: string;
 };
 
-const Guage = ({ percent, title }: Props) => {
+const Guage = ({ percent, title, unit = "" }: Props) => {
   const { x: x1, y: y1 } = calcXY(0, 121.6);
   const { x: x2, y: y2 } = calcXY(270, 121.6);
   const { x: x3, y: y3 } = calcXY(270, 79);
@@ -61,7 +62,7 @@ const Guage = ({ percent, title }: Props) => {
         fontSize="48px"
         dominantBaseline="middle"
       >
-        {percent} %
+        {percent}
       </text>
       <text
         id="title"
@@ -72,6 +73,15 @@ const Guage = ({ percent, title }: Props) => {
         dominantBaseline="middle"
       >
         {title}
+      </text>
+      <text
+        id="unit"
+        x={127}
+        y={calcXY(135, 121.6)["y"] + 24}
+        fontSize="18px"
+        dominantBaseline="middle"
+      >
+        {unit}
       </text>
     </svg>
   );

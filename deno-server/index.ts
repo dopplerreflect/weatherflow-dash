@@ -11,11 +11,11 @@ listenAndServe({ port: 3001 }, async (req) => {
   let headers = new Headers();
   switch (req.url) {
     case "/":
-      body = await Deno.readTextFile("../react-app/build/index.html");
+      body = await Deno.readTextFile("../react-app/dist/index.html");
       req.respond({ body });
       break;
     case "/favicon.ico":
-      body = await Deno.readTextFile("../react-app/dist/favicon.svg");
+      body = await Deno.readTextFile("../react-app/favicon.svg");
       headers.set("content-type", "image/svg+xml");
       req.respond({ body, headers });
       break;

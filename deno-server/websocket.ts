@@ -8,8 +8,8 @@ import { WfData, WfMessageObj } from "./types.d.ts";
 const ENV = config();
 
 // used to truncate data length
-const MAX_RAPID_WIND_ENTRIES = 60 * 5 / 3;
-const MAX_OBS_ST_ENTRIES = 5;
+const MAX_RAPID_WIND_ENTRIES = 3;
+const MAX_OBS_ST_ENTRIES = 2;
 
 const endpoint =
   `wss://ws.weatherflow.com/swd/data?api_key=${ENV.WEATHERFLOW_API_KEY}`;
@@ -30,6 +30,7 @@ try {
 data = JSON.parse(jsonText);
 
 const sendMessage = (message: any) => {
+  console.log(message);
   clientsMap.forEach((client) => {
     if (client.ws._isClosed) {
       clientsMap.delete(client.clientId);

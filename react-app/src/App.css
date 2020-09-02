@@ -9,6 +9,8 @@ body {
 #App {
   height: 100vh;
   background-color: hsl(var(--base-hue), 100%, 5%);
+  display: flex;
+  flex-direction: row;
 }
 
 #RangeControl {

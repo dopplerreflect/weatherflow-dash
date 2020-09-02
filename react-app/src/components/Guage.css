@@ -29,6 +29,7 @@ svg#Guage text#value {
   font-weight: bold;
 }
 
-svg#Guage text#title {
+svg#Guage text#title,
+svg#Guage text#unit {
   fill: hsl(var(--base-hue), 100%, 75%);
 }

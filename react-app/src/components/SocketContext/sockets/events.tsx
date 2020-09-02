@@ -39,19 +39,16 @@ export const socketEvents = ({ setValue }: SetSocketStateProps) => {
           );
           break;
         case "rapid_wind":
+          // console.log(message.rapid_wind);
           setValue((state) => ({
             ...state,
-            rapid_wind: message.rapid_wind.map((rw: any) =>
-              decodeRapidWind(message.rapid_wind)
-            ),
+            rapid_wind: message.rapid_wind.map((e: any) => decodeRapidWind(e)),
           }));
           break;
         case "obs_st":
           setValue((state) => ({
             ...state,
-            obs_st: message.obs_st.map((rw: any) =>
-              decodeObsSt(message.obs_st[0])
-            ),
+            obs_st: message.obs_st.map((e: any) => decodeObsSt(e)),
           }));
           break;
         case "summary":
