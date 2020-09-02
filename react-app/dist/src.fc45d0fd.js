@@ -28869,13 +28869,13 @@ var Windchart = function Windchart(_a) {
     className: "text"
   }, react_1.default.createElement("text", {
     x: "243",
-    y: "30"
+    y: "36"
   }, "N"), react_1.default.createElement("text", {
-    x: "483",
+    x: "482",
     y: "269"
   }, "E"), react_1.default.createElement("text", {
     x: "243",
-    y: "509"
+    y: "508"
   }, "S"), react_1.default.createElement("text", {
     x: "4",
     y: "269"
@@ -28895,7 +28895,7 @@ var Windchart = function Windchart(_a) {
     className: "ring",
     cx: 256,
     cy: 256,
-    r: 256
+    r: 254
   }), !rapid_wind && react_1.default.createElement("text", {
     id: "no-data",
     x: "256",
@@ -28953,8 +28953,13 @@ var Windchart = function Windchart(_a) {
     x: "256",
     y: "325"
   }, latestDir, "\xB0")), react_1.default.createElement("g", {
-    className: "speed-legend"
-  }, [0, 5, 10, 15, 20, 25].map(function (s, i) {
+    id: "speed-legend"
+  }, react_1.default.createElement("rect", {
+    x: "0",
+    y: "491",
+    width: "512",
+    height: "21"
+  }), [0, 5, 10, 15, 20, 25].map(function (s, i) {
     return react_1.default.createElement("text", {
       key: s,
       x: 512 / 6 * i + 512 / 12,
@@ -29127,7 +29132,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "46081" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "39175" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

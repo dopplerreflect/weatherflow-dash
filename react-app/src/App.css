@@ -7,12 +7,15 @@ body {
   --base-hue: 210;
 }
 #App {
-  height: 100vh;
   background-color: hsl(var(--base-hue), 100%, 5%);
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  align-items: center;
 }
-
+#App > div {
+  width: min(100vh, 100vw);
+  background-color: hsl(var(--base-hue), 100%, 5%);
+}
 #RangeControl {
   margin: 0;
   width: 100%;

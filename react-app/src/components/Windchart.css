@@ -43,10 +43,6 @@ svg#Windchart .direction-indicator {
   transform-origin: 256px 256px;
   transform: rotate(0deg);
 }
-.speed-legend {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  display: flex;
+svg#Windchart #speed-legend rect {
+  fill: hsla(var(--base-hue), 100%, 25%, 0.5);
 }
