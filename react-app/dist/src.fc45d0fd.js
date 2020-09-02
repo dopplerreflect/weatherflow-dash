@@ -28865,6 +28865,28 @@ var Windchart = function Windchart(_a) {
     x2: "254",
     y2: "510",
     className: "line"
+  })), react_1.default.createElement("g", null, ringRadii.map(function (i) {
+    return react_1.default.createElement("circle", {
+      key: i,
+      cx: 256,
+      cy: 256,
+      r: 256 / maxMps * i,
+      style: {
+        fill: "transparent",
+        stroke: "hsl(" + hueForSpeed(i) + ", 100%, 50%)",
+        strokeWidth: 1
+      }
+    });
+  })), react_1.default.createElement("g", null, rapid_wind.map(function (rw, i) {
+    return react_1.default.createElement("circle", {
+      key: i,
+      cx: 256 + 256 / maxMps * rw.mps * Math.cos((rw.dir - 90) * (Math.PI / 180)) || 256,
+      cy: 256 + 256 / maxMps * rw.mps * Math.sin((rw.dir - 90) * (Math.PI / 180)) || 256,
+      r: 3,
+      style: {
+        fill: "hsla(\n                    " + hueForSpeed(rw.mps) + ",\n                    " + 100 / rapid_wind.length * i + "%,\n                    50%,\n                    " + 1 / rapid_wind.length * i + ")"
+      }
+    });
   })), react_1.default.createElement("g", {
     className: "text"
   }, react_1.default.createElement("text", {
@@ -28891,42 +28913,7 @@ var Windchart = function Windchart(_a) {
   }), react_1.default.createElement("use", {
     href: "#line",
     transform: "rotate(157.5, 256, 256)"
-  }), react_1.default.createElement("circle", {
-    className: "ring",
-    cx: 256,
-    cy: 256,
-    r: 254
-  }), !rapid_wind && react_1.default.createElement("text", {
-    id: "no-data",
-    x: "256",
-    y: "256",
-    textAnchor: "middle",
-    dominantBaseline: "middle",
-    fontSize: "3em",
-    fill: "white"
-  }, "No Data"), react_1.default.createElement("g", null, ringRadii.map(function (i) {
-    return react_1.default.createElement("circle", {
-      key: i,
-      cx: 256,
-      cy: 256,
-      r: 256 / maxMps * i,
-      style: {
-        fill: "transparent",
-        stroke: "hsl(" + hueForSpeed(i) + ", 100%, 50%)",
-        strokeWidth: 1
-      }
-    });
-  })), react_1.default.createElement("g", null, rapid_wind.map(function (rw, i) {
-    return react_1.default.createElement("circle", {
-      key: i,
-      cx: 256 + 256 / maxMps * rw.mps * Math.cos((rw.dir - 90) * (Math.PI / 180)) || 256,
-      cy: 256 + 256 / maxMps * rw.mps * Math.sin((rw.dir - 90) * (Math.PI / 180)) || 256,
-      r: 3,
-      style: {
-        fill: "hsla(\n                    " + hueForSpeed(rw.mps) + ",\n                    " + 100 / rapid_wind.length * i + "%,\n                    50%,\n                    " + 1 / rapid_wind.length * i + ")"
-      }
-    });
-  })), latestMps > 0 && react_1.default.createElement("g", null, react_1.default.createElement("path", {
+  }), latestMps > 0 && react_1.default.createElement("g", null, react_1.default.createElement("path", {
     className: "direction-indicator",
     id: "directionIndicator",
     d: "M 258 35 L 260 256 L 314 314 L 256 480 L 197 314 L 252 256 L 254 35 Z",
@@ -28952,7 +28939,12 @@ var Windchart = function Windchart(_a) {
     className: "velocity-legend",
     x: "256",
     y: "325"
-  }, latestDir, "\xB0")), react_1.default.createElement("g", {
+  }, latestDir, "\xB0")), react_1.default.createElement("circle", {
+    className: "ring",
+    cx: 256,
+    cy: 256,
+    r: 254
+  }), react_1.default.createElement("g", {
     id: "speed-legend"
   }, react_1.default.createElement("rect", {
     x: "0",

@@ -47,41 +47,6 @@ const Windchart: React.FC<Props> = ({ rapid_wind }) => {
         <line id="line" x1="254" y1="2" x2="254" y2="510" className="line" />
       </defs>
 
-      <g className="text">
-        <text x="243" y="36">
-          N
-        </text>
-        <text x="482" y="269">
-          E
-        </text>
-        <text x="243" y="508">
-          S
-        </text>
-        <text x="4" y="269">
-          W
-        </text>
-      </g>
-
-      <use href="#line" transform="rotate(22.5, 256, 256)" />
-      <use href="#line" transform="rotate(67.5, 256, 256)" />
-      <use href="#line" transform="rotate(112.5, 256, 256)" />
-      <use href="#line" transform="rotate(157.5, 256, 256)" />
-
-      <circle className="ring" cx={256} cy={256} r={254} />
-
-      {!rapid_wind && (
-        <text
-          id="no-data"
-          x="256"
-          y="256"
-          textAnchor="middle"
-          dominantBaseline="middle"
-          fontSize="3em"
-          fill="white"
-        >
-          No Data
-        </text>
-      )}
       <g>
         {ringRadii.map((i) => (
           <circle
@@ -118,6 +83,26 @@ const Windchart: React.FC<Props> = ({ rapid_wind }) => {
           />
         ))}
       </g>
+      <g className="text">
+        <text x="243" y="36">
+          N
+        </text>
+        <text x="482" y="269">
+          E
+        </text>
+        <text x="243" y="508">
+          S
+        </text>
+        <text x="4" y="269">
+          W
+        </text>
+      </g>
+
+      <use href="#line" transform="rotate(22.5, 256, 256)" />
+      <use href="#line" transform="rotate(67.5, 256, 256)" />
+      <use href="#line" transform="rotate(112.5, 256, 256)" />
+      <use href="#line" transform="rotate(157.5, 256, 256)" />
+
       {latestMps > 0 && (
         <g>
           <path
@@ -152,6 +137,9 @@ const Windchart: React.FC<Props> = ({ rapid_wind }) => {
           </text>
         </g>
       )}
+
+      <circle className="ring" cx={256} cy={256} r={254} />
+
       <g id="speed-legend">
         <rect x="0" y="491" width="512" height="21" />
         {[0, 5, 10, 15, 20, 25].map((s, i) => (
