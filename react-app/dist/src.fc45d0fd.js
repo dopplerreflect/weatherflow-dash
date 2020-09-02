@@ -28860,10 +28860,10 @@ var Windchart = function Windchart(_a) {
     viewBox: "0 0 512 512"
   }, react_1.default.createElement("defs", null, react_1.default.createElement("line", {
     id: "line",
-    x1: "256",
-    y1: "0",
-    x2: "256",
-    y2: "512",
+    x1: "254",
+    y1: "2",
+    x2: "254",
+    y2: "510",
     className: "line"
   })), react_1.default.createElement("g", {
     className: "text"

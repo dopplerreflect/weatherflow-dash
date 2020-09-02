@@ -44,7 +44,7 @@ const Windchart: React.FC<Props> = ({ rapid_wind }) => {
       viewBox={`0 0 512 512`}
     >
       <defs>
-        <line id="line" x1="256" y1="0" x2="256" y2="512" className="line" />
+        <line id="line" x1="254" y1="2" x2="254" y2="510" className="line" />
       </defs>
 
       <g className="text">
