@@ -28456,7 +28456,7 @@ var emit_1 = require("./emit");
 
 var decodeWeatherflowObjects_1 = require("../../../utils/decodeWeatherflowObjects");
 
-var SOCKET_SERVER = (document.location.protocol === "https:" ? "wss" : "ws") + "://" + document.location.host + "/ws";
+var SOCKET_SERVER = (document.location.protocol === "https:" ? "wss" : "ws") + "://" + (document.location.host.match("localhost") ? "localhost:3001" : document.location.host) + "/ws";
 
 exports.socketEvents = function (_a) {
   var setValue = _a.setValue;
@@ -29171,7 +29171,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "33459" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "46081" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -6,7 +6,11 @@ import {
 
 const SOCKET_SERVER = `${
   document.location.protocol === "https:" ? "wss" : "ws"
-}://${document.location.host}/ws`;
+}://${
+  document.location.host.match("localhost")
+    ? "localhost:3001"
+    : document.location.host
+}/ws`;
 
 export let socket: WebSocket;
 
