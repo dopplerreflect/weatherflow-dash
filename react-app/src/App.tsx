@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import Guage from "./components/Guage";
+import Windchart from "./components/Windchart";
 import SocketContext from "./components/SocketContext/context";
 import "./App.css";
 
@@ -11,10 +12,8 @@ const App = () => {
   return (
     <div id="App">
       <div>
-        <Guage
-          value={Number((latest_rapid_wind.mps * 2.237).toFixed(1))}
-          title="Wind Speed"
-          unit="mph"
+        <Windchart
+          rapid_wind={rapid_wind.map((e) => ({ ...e, mps: e.mps * 2.237 }))}
         />
       </div>
       <div>
