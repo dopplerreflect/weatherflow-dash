@@ -11,8 +11,12 @@ const ENV = config();
 const MAX_RAPID_WIND_ENTRIES = (60 / 3) * 60;
 const MAX_OBS_ST_ENTRIES = 60;
 
+const WEATHERFLOW_API_KEY = Deno.env.toObject()["WEATHERFLOW_API_KEY"];
+const WEATHERFLOW_DEVICE_ID = Deno.env.toObject()["WEATHERFLOW_DEVICE_ID"];
+
 const endpoint =
-  `wss://ws.weatherflow.com/swd/data?api_key=${ENV.WEATHERFLOW_API_KEY}`;
+  `wss://ws.weatherflow.com/swd/data?api_key=${WEATHERFLOW_API_KEY ||
+    ENV.WEATHERFLOW_API_KEY}`;
 
 const clientsMap = new Map();
 
@@ -84,7 +88,7 @@ wsClient.on("message", async function (message: string) {
 });
 
 const sendStartRequests = (): void => {
-  const device_id = ENV.WEATHERFLOW_DEVICE_ID;
+  const device_id = WEATHERFLOW_DEVICE_ID || ENV.WEATHERFLOW_DEVICE_ID;
   wsClient.send(JSON.stringify({
     device_id,
     type: "listen_rapid_start",
