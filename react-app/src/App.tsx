@@ -1,7 +1,6 @@
 import React, { useState, useContext } from "react";
 import Guage from "./components/Guage";
 import SocketContext from "./components/SocketContext/context";
-import { last } from "./utils/last";
 import "./App.css";
 
 const App = () => {
@@ -13,21 +12,21 @@ const App = () => {
     <div id="App">
       <div>
         <Guage
-          percent={latest_rapid_wind.mps * 2.237}
+          value={Number((latest_rapid_wind.mps * 2.237).toFixed(1))}
           title="Wind Speed"
           unit="mph"
         />
       </div>
       <div>
         <Guage
-          percent={Math.round(latest_obs_st.air_temperature * (9 / 5) + 32)}
+          value={Number((latest_obs_st.air_temperature * 1.8 + 32).toFixed(1))}
           title="Temperature"
           unit="°F"
         />
       </div>
       <div>
         <Guage
-          percent={latest_obs_st.relative_humidity}
+          value={latest_obs_st.relative_humidity}
           title="Humidity"
           unit="%"
         />
