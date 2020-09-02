@@ -1,16 +1,15 @@
 import React from "react";
 import "./Windchart.css";
 
-interface Props {
-  rapid_wind: DecodedRapidWind[];
-}
-
 const hueForSpeed = (mph: number) => {
   if (mph >= 25) {
     return -82.5;
   }
   return 230 - Number(mph) * 12.5;
 };
+interface Props {
+  rapid_wind: DecodedRapidWind[];
+}
 
 const Windchart: React.FC<Props> = ({ rapid_wind }) => {
   let latestDir = 0;
@@ -42,15 +41,10 @@ const Windchart: React.FC<Props> = ({ rapid_wind }) => {
     <svg
       id="Windchart"
       xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 512 512"
+      viewBox={`0 0 512 512`}
     >
       <defs>
-        <path
-          id="hashmark"
-          d="M 250 3 L 256 29 L 262 3 Z"
-          className="hashmark"
-        />
-        <line id="line" x1="256" y1="32" x2="256" y2="480" className="line" />
+        <line id="line" x1="256" y1="0" x2="256" y2="512" className="line" />
       </defs>
 
       <g className="text">
@@ -67,27 +61,13 @@ const Windchart: React.FC<Props> = ({ rapid_wind }) => {
           W
         </text>
       </g>
-      <g>
-        <use href="#hashmark" transform="rotate(22.5, 256, 256)" />
-        <use href="#hashmark" transform="rotate(45, 256, 256)" />
-        <use href="#hashmark" transform="rotate(67.5, 256, 256)" />
-        <use href="#hashmark" transform="rotate(112.5, 256, 256)" />
-        <use href="#hashmark" transform="rotate(135, 256, 256)" />
-        <use href="#hashmark" transform="rotate(157.5, 256, 256)" />
-        <use href="#hashmark" transform="rotate(202.5, 256, 256)" />
-        <use href="#hashmark" transform="rotate(225, 256, 256)" />
-        <use href="#hashmark" transform="rotate(247.5, 256, 256)" />
-        <use href="#hashmark" transform="rotate(292.5, 256, 256)" />
-        <use href="#hashmark" transform="rotate(315, 256, 256)" />
-        <use href="#hashmark" transform="rotate(337.5, 256, 256)" />
-      </g>
 
       <use href="#line" transform="rotate(22.5, 256, 256)" />
       <use href="#line" transform="rotate(67.5, 256, 256)" />
       <use href="#line" transform="rotate(112.5, 256, 256)" />
       <use href="#line" transform="rotate(157.5, 256, 256)" />
 
-      <circle id="outer-ring" cx={256} cy={256} r={220} />
+      <circle className="ring" cx={256} cy={256} r={256} />
 
       {!rapid_wind && (
         <text
@@ -104,16 +84,13 @@ const Windchart: React.FC<Props> = ({ rapid_wind }) => {
       )}
       <g>
         {ringRadii.map((i) => (
-          //@ts-ignore
           <circle
             key={i}
             cx={256}
             cy={256}
-            //@ts-ignore
-            r={(220 / maxMps) * i}
+            r={(256 / maxMps) * i}
             style={{
               fill: "transparent",
-              //@ts-ignore
               stroke: `hsl(${hueForSpeed(i)}, 100%, 50%)`,
               strokeWidth: 1,
             }}
@@ -125,10 +102,10 @@ const Windchart: React.FC<Props> = ({ rapid_wind }) => {
           <circle
             key={i}
             cx={256 +
-                (220 / maxMps) * rw.mps *
+                (256 / maxMps) * rw.mps *
                   Math.cos((rw.dir - 90) * (Math.PI / 180)) || 256}
             cy={256 +
-                (220 / maxMps) * rw.mps *
+                (256 / maxMps) * rw.mps *
                   Math.sin((rw.dir - 90) * (Math.PI / 180)) || 256}
             r={3}
             style={{

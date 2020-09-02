@@ -67,10 +67,10 @@ svg#Windchart .line {
   stroke: hsl(var(--base-hue), 100%, 75%);
   stroke-width: 1px;
 }
-svg#Windchart #outer-ring {
+svg#Windchart .ring {
   fill: none;
   stroke: hsl(var(--base-hue), 100%, 75%);
-  stroke-width: 1;
+  stroke-width: 2;
 }
 svg#Windchart .direction-indicator {
   fill: hsla(calc(var(--base-hue) - 210), 100%, 50%, 0.25);

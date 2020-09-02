@@ -28858,16 +28858,12 @@ var Windchart = function Windchart(_a) {
     id: "Windchart",
     xmlns: "http://www.w3.org/2000/svg",
     viewBox: "0 0 512 512"
-  }, react_1.default.createElement("defs", null, react_1.default.createElement("path", {
-    id: "hashmark",
-    d: "M 250 3 L 256 29 L 262 3 Z",
-    className: "hashmark"
-  }), react_1.default.createElement("line", {
+  }, react_1.default.createElement("defs", null, react_1.default.createElement("line", {
     id: "line",
     x1: "256",
-    y1: "32",
+    y1: "0",
     x2: "256",
-    y2: "480",
+    y2: "512",
     className: "line"
   })), react_1.default.createElement("g", {
     className: "text"
@@ -28883,43 +28879,7 @@ var Windchart = function Windchart(_a) {
   }, "S"), react_1.default.createElement("text", {
     x: "4",
     y: "269"
-  }, "W")), react_1.default.createElement("g", null, react_1.default.createElement("use", {
-    href: "#hashmark",
-    transform: "rotate(22.5, 256, 256)"
-  }), react_1.default.createElement("use", {
-    href: "#hashmark",
-    transform: "rotate(45, 256, 256)"
-  }), react_1.default.createElement("use", {
-    href: "#hashmark",
-    transform: "rotate(67.5, 256, 256)"
-  }), react_1.default.createElement("use", {
-    href: "#hashmark",
-    transform: "rotate(112.5, 256, 256)"
-  }), react_1.default.createElement("use", {
-    href: "#hashmark",
-    transform: "rotate(135, 256, 256)"
-  }), react_1.default.createElement("use", {
-    href: "#hashmark",
-    transform: "rotate(157.5, 256, 256)"
-  }), react_1.default.createElement("use", {
-    href: "#hashmark",
-    transform: "rotate(202.5, 256, 256)"
-  }), react_1.default.createElement("use", {
-    href: "#hashmark",
-    transform: "rotate(225, 256, 256)"
-  }), react_1.default.createElement("use", {
-    href: "#hashmark",
-    transform: "rotate(247.5, 256, 256)"
-  }), react_1.default.createElement("use", {
-    href: "#hashmark",
-    transform: "rotate(292.5, 256, 256)"
-  }), react_1.default.createElement("use", {
-    href: "#hashmark",
-    transform: "rotate(315, 256, 256)"
-  }), react_1.default.createElement("use", {
-    href: "#hashmark",
-    transform: "rotate(337.5, 256, 256)"
-  })), react_1.default.createElement("use", {
+  }, "W")), react_1.default.createElement("use", {
     href: "#line",
     transform: "rotate(22.5, 256, 256)"
   }), react_1.default.createElement("use", {
@@ -28932,10 +28892,10 @@ var Windchart = function Windchart(_a) {
     href: "#line",
     transform: "rotate(157.5, 256, 256)"
   }), react_1.default.createElement("circle", {
-    id: "outer-ring",
+    className: "ring",
     cx: 256,
     cy: 256,
-    r: 220
+    r: 256
   }), !rapid_wind && react_1.default.createElement("text", {
     id: "no-data",
     x: "256",
@@ -28945,26 +28905,22 @@ var Windchart = function Windchart(_a) {
     fontSize: "3em",
     fill: "white"
   }, "No Data"), react_1.default.createElement("g", null, ringRadii.map(function (i) {
-    return (//@ts-ignore
-      react_1.default.createElement("circle", {
-        key: i,
-        cx: 256,
-        cy: 256,
-        //@ts-ignore
-        r: 220 / maxMps * i,
-        style: {
-          fill: "transparent",
-          //@ts-ignore
-          stroke: "hsl(" + hueForSpeed(i) + ", 100%, 50%)",
-          strokeWidth: 1
-        }
-      })
-    );
+    return react_1.default.createElement("circle", {
+      key: i,
+      cx: 256,
+      cy: 256,
+      r: 256 / maxMps * i,
+      style: {
+        fill: "transparent",
+        stroke: "hsl(" + hueForSpeed(i) + ", 100%, 50%)",
+        strokeWidth: 1
+      }
+    });
   })), react_1.default.createElement("g", null, rapid_wind.map(function (rw, i) {
     return react_1.default.createElement("circle", {
       key: i,
-      cx: 256 + 220 / maxMps * rw.mps * Math.cos((rw.dir - 90) * (Math.PI / 180)) || 256,
-      cy: 256 + 220 / maxMps * rw.mps * Math.sin((rw.dir - 90) * (Math.PI / 180)) || 256,
+      cx: 256 + 256 / maxMps * rw.mps * Math.cos((rw.dir - 90) * (Math.PI / 180)) || 256,
+      cy: 256 + 256 / maxMps * rw.mps * Math.sin((rw.dir - 90) * (Math.PI / 180)) || 256,
       r: 3,
       style: {
         fill: "hsla(\n                    " + hueForSpeed(rw.mps) + ",\n                    " + 100 / rapid_wind.length * i + "%,\n                    50%,\n                    " + 1 / rapid_wind.length * i + ")"
