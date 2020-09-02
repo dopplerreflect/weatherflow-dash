@@ -28456,7 +28456,7 @@ var emit_1 = require("./emit");
 
 var decodeWeatherflowObjects_1 = require("../../../utils/decodeWeatherflowObjects");
 
-var SOCKET_SERVER = "ws://" + document.location.host + "/ws";
+var SOCKET_SERVER = (document.location.protocol === "https:" ? "wss" : "ws") + "://" + document.location.host + "/ws";
 
 exports.socketEvents = function (_a) {
   var setValue = _a.setValue;

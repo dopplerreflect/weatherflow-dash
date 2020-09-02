@@ -4,7 +4,9 @@ import {
   decodeObsSt,
 } from "../../../utils/decodeWeatherflowObjects";
 
-const SOCKET_SERVER = `ws://${document.location.host}/ws`;
+const SOCKET_SERVER = `${
+  document.location.protocol === "https:" ? "wss" : "ws"
+}://${document.location.host}/ws`;
 
 export let socket: WebSocket;
 
