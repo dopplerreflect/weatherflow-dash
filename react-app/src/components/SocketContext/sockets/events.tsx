@@ -3,7 +3,8 @@ import {
   decodeRapidWind,
   decodeObsSt,
 } from "../../../utils/decodeWeatherflowObjects";
-const SOCKET_SERVER = "ws://localhost:3001/ws";
+
+const SOCKET_SERVER = `ws://${document.location.host}/ws`;
 
 export let socket: WebSocket;
 
