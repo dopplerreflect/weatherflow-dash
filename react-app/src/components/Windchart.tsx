@@ -44,7 +44,7 @@ const Windchart: React.FC<Props> = ({ rapid_wind }) => {
       viewBox={`0 0 512 512`}
     >
       <defs>
-        <line id="line" x1="254" y1="2" x2="254" y2="510" className="line" />
+        <line id="line" x1="256" y1="2" x2="256" y2="253.5" className="line" />
       </defs>
 
       <g>
@@ -102,6 +102,10 @@ const Windchart: React.FC<Props> = ({ rapid_wind }) => {
       <use href="#line" transform="rotate(67.5, 256, 256)" />
       <use href="#line" transform="rotate(112.5, 256, 256)" />
       <use href="#line" transform="rotate(157.5, 256, 256)" />
+      <use href="#line" transform="rotate(202.5, 256, 256)" />
+      <use href="#line" transform="rotate(247.5, 256, 256)" />
+      <use href="#line" transform="rotate(292.5, 256, 256)" />
+      <use href="#line" transform="rotate(337.5, 256, 256)" />
 
       {latestMps > 0 && (
         <g>

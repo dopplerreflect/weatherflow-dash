@@ -28860,10 +28860,10 @@ var Windchart = function Windchart(_a) {
     viewBox: "0 0 512 512"
   }, react_1.default.createElement("defs", null, react_1.default.createElement("line", {
     id: "line",
-    x1: "254",
+    x1: "256",
     y1: "2",
-    x2: "254",
-    y2: "510",
+    x2: "256",
+    y2: "253.5",
     className: "line"
   })), react_1.default.createElement("g", null, ringRadii.map(function (i) {
     return react_1.default.createElement("circle", {
@@ -28913,6 +28913,18 @@ var Windchart = function Windchart(_a) {
   }), react_1.default.createElement("use", {
     href: "#line",
     transform: "rotate(157.5, 256, 256)"
+  }), react_1.default.createElement("use", {
+    href: "#line",
+    transform: "rotate(202.5, 256, 256)"
+  }), react_1.default.createElement("use", {
+    href: "#line",
+    transform: "rotate(247.5, 256, 256)"
+  }), react_1.default.createElement("use", {
+    href: "#line",
+    transform: "rotate(292.5, 256, 256)"
+  }), react_1.default.createElement("use", {
+    href: "#line",
+    transform: "rotate(337.5, 256, 256)"
   }), latestMps > 0 && react_1.default.createElement("g", null, react_1.default.createElement("path", {
     className: "direction-indicator",
     id: "directionIndicator",
@@ -29124,7 +29136,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "39175" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "34219" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
