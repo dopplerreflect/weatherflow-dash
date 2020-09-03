@@ -28678,122 +28678,7 @@ function reloadCSS() {
 }
 
 module.exports = reloadCSS;
-},{"./bundle-url":"node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"src/components/Guage.css":[function(require,module,exports) {
-var reloadCSS = require('_css_loader');
-
-module.hot.dispose(reloadCSS);
-module.hot.accept(reloadCSS);
-},{"_css_loader":"node_modules/parcel-bundler/src/builtins/css-loader.js"}],"src/components/Guage.tsx":[function(require,module,exports) {
-"use strict";
-
-var __importDefault = this && this.__importDefault || function (mod) {
-  return mod && mod.__esModule ? mod : {
-    "default": mod
-  };
-};
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var react_1 = __importDefault(require("react"));
-
-require("./Guage.css");
-
-var calcXY = function calcXY(angle, radius, center) {
-  if (radius === void 0) {
-    radius = 50;
-  }
-
-  if (center === void 0) {
-    center = 128;
-  }
-
-  var radians = angle * Math.PI / 180;
-  var x = center + radius * Math.cos(radians);
-  var y = center + radius * Math.sin(radians);
-  return {
-    x: x,
-    y: y
-  };
-};
-
-var Guage = function Guage(_a) {
-  var value = _a.value,
-      title = _a.title,
-      _b = _a.unit,
-      unit = _b === void 0 ? "" : _b;
-
-  var _c = calcXY(0, 121.6),
-      x1 = _c.x,
-      y1 = _c.y;
-
-  var _d = calcXY(270, 121.6),
-      x2 = _d.x,
-      y2 = _d.y;
-
-  var _e = calcXY(270, 79),
-      x3 = _e.x,
-      y3 = _e.y;
-
-  var _f = calcXY(0, 79),
-      x4 = _f.x,
-      y4 = _f.y;
-
-  var _g = calcXY(2.7 * value, 120),
-      lx1 = _g.x,
-      ly1 = _g.y;
-
-  var _h = calcXY(2.7 * value - 5, 80.5),
-      lx2 = _h.x,
-      ly2 = _h.y;
-
-  var _j = calcXY(2.7 * value + 5, 80.5),
-      lx3 = _j.x,
-      ly3 = _j.y;
-
-  return react_1.default.createElement("svg", {
-    id: "Guage",
-    xmlns: "http://www.w3.org/2000/svg",
-    viewBox: "0 0 256 256"
-  }, react_1.default.createElement("g", {
-    transform: "rotate(135, 128, 128)"
-  }, react_1.default.createElement("circle", {
-    id: "background-circle",
-    cx: 128,
-    cy: 128,
-    r: 127
-  }), react_1.default.createElement("path", {
-    id: "needle",
-    d: "M " + lx1 + " " + ly1 + " L " + lx2 + " " + ly2 + " \n          A 80.5 80.5 0 0 1 " + lx3 + " " + ly3 + " Z",
-    strokeWidth: 1.5
-  }), react_1.default.createElement("path", {
-    id: "range",
-    d: "\n            M 0 128 A 128 128 0 1 0 0 127.9 Z\n            M " + x1 + " " + y1 + " \n            A " + 121.6 + " " + 121.6 + " 1 1 1 " + x2 + " " + y2 + "\n            L " + x3 + " " + y3 + "\n            A " + 79 + " " + 79 + " 0 1 0 " + x4 + " " + y4 + "\n            Z\n\n        "
-  })), react_1.default.createElement("text", {
-    id: "value",
-    x: 127,
-    y: 127,
-    fontSize: "48px",
-    dominantBaseline: "middle"
-  }, value), react_1.default.createElement("text", {
-    id: "title",
-    x: 127,
-    y: calcXY(135, 121.6)["y"],
-    fontSize: "24px",
-    fontWeight: "bold",
-    dominantBaseline: "middle"
-  }, title), react_1.default.createElement("text", {
-    id: "unit",
-    x: 127,
-    y: calcXY(135, 121.6)["y"] + 24,
-    fontSize: "18px",
-    dominantBaseline: "middle"
-  }, unit));
-};
-
-exports.default = Guage;
-},{"react":"node_modules/react/index.js","./Guage.css":"src/components/Guage.css"}],"src/components/Stat.css":[function(require,module,exports) {
+},{"./bundle-url":"node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"src/components/Stat.css":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -28801,6 +28686,84 @@ module.hot.accept(reloadCSS);
 },{"_css_loader":"node_modules/parcel-bundler/src/builtins/css-loader.js"}],"src/components/Stat.tsx":[function(require,module,exports) {
 "use strict";
 
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
+};
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var react_1 = __importStar(require("react"));
+
+require("./Stat.css");
+
+var Stat = function Stat(_a) {
+  var label = _a.label,
+      value = _a.value,
+      unit = _a.unit;
+  return react_1.default.createElement("svg", {
+    id: "Stat",
+    xmlns: "http://www.w3.org/2000/svg",
+    viewBox: "0 0 256 158.2464"
+  }, react_1.default.createElement("rect", {
+    id: "background",
+    x: 1,
+    y: 1,
+    width: 254,
+    height: 156.2464,
+    rx: 8
+  }), react_1.default.createElement("text", {
+    id: "label",
+    x: 128,
+    y: 30
+  }, label), react_1.default.createElement("text", {
+    id: "value",
+    x: 128,
+    y: 96,
+    dominantBaseline: "middle"
+  }, value, unit && " " + unit));
+};
+
+exports.default = react_1.memo(Stat);
+},{"react":"node_modules/react/index.js","./Stat.css":"src/components/Stat.css"}],"src/components/Windchart.css":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"_css_loader":"node_modules/parcel-bundler/src/builtins/css-loader.js"}],"src/components/Windchart.tsx":[function(require,module,exports) {
+"use strict";
+
 var __importDefault = this && this.__importDefault || function (mod) {
   return mod && mod.__esModule ? mod : {
     "default": mod
@@ -28813,43 +28776,304 @@ Object.defineProperty(exports, "__esModule", {
 
 var react_1 = __importDefault(require("react"));
 
-require("./Stat.css");
+require("./Windchart.css");
 
-var Stat = function Stat(_a) {
-  var value = _a.value,
-      label = _a.label,
-      unit = _a.unit;
+var hueForSpeed = function hueForSpeed(mph) {
+  if (mph >= 25) {
+    return -82.5;
+  }
+
+  return 230 - Number(mph) * 12.5;
+};
+
+var Windchart = function Windchart(_a) {
+  var rapid_wind = _a.rapid_wind;
+  var latestDir = 0;
+  var latestMps = 0;
+  var maxMps;
+  var ringRadii = [];
+
+  try {
+    var latest = rapid_wind[rapid_wind.length - 1];
+    latestMps = latest.mps;
+    latestDir = latest.dir;
+    maxMps = Math.max.apply(Math, rapid_wind.map(function (e, i) {
+      return e.mps;
+    }));
+    ringRadii = Array.from({
+      length: Math.ceil(maxMps)
+    }).map(function (_, i) {
+      var div = maxMps > 5 ? 5 : 1;
+
+      if (i % div === 0) {
+        return i;
+      }
+
+      return -1;
+    }).filter(function (v) {
+      return v !== -1;
+    }).slice(1);
+  } catch (e) {
+    console.log(e);
+  }
+
   return react_1.default.createElement("svg", {
-    id: "Stat",
+    id: "Windchart",
     xmlns: "http://www.w3.org/2000/svg",
-    viewBox: "0 0 256 128"
+    viewBox: "0 0 512 512"
+  }, react_1.default.createElement("defs", null, react_1.default.createElement("line", {
+    id: "line",
+    x1: "256",
+    y1: "2",
+    x2: "256",
+    y2: "253.5",
+    className: "line"
+  })), react_1.default.createElement("g", null, ringRadii.map(function (i) {
+    return react_1.default.createElement("circle", {
+      key: i,
+      cx: 256,
+      cy: 256,
+      r: 256 / maxMps * i,
+      style: {
+        fill: "transparent",
+        stroke: "hsl(" + hueForSpeed(i) + ", 100%, 50%)",
+        strokeWidth: 1
+      }
+    });
+  })), react_1.default.createElement("g", null, rapid_wind.map(function (rw, i) {
+    return react_1.default.createElement("circle", {
+      key: i,
+      cx: 256 + 256 / maxMps * rw.mps * Math.cos((rw.dir - 90) * (Math.PI / 180)) || 256,
+      cy: 256 + 256 / maxMps * rw.mps * Math.sin((rw.dir - 90) * (Math.PI / 180)) || 256,
+      r: 3,
+      style: {
+        fill: "hsla(\n                      " + hueForSpeed(rw.mps) + ",\n                      " + 100 / rapid_wind.length * i + "%,\n                      50%,\n                      " + 1 / rapid_wind.length * i + ")"
+      }
+    });
+  })), react_1.default.createElement("rect", {
+    id: "speed-legend-bg",
+    x: "0",
+    y: "491",
+    width: "512",
+    height: "21"
+  }), react_1.default.createElement("g", {
+    className: "text"
+  }, react_1.default.createElement("text", {
+    x: "243",
+    y: "36"
+  }, "N"), react_1.default.createElement("text", {
+    x: "482",
+    y: "269"
+  }, "E"), react_1.default.createElement("text", {
+    x: "243",
+    y: "508"
+  }, "S"), react_1.default.createElement("text", {
+    x: "4",
+    y: "269"
+  }, "W")), react_1.default.createElement("use", {
+    href: "#line",
+    transform: "rotate(22.5, 256, 256)"
+  }), react_1.default.createElement("use", {
+    href: "#line",
+    transform: "rotate(67.5, 256, 256)"
+  }), react_1.default.createElement("use", {
+    href: "#line",
+    transform: "rotate(112.5, 256, 256)"
+  }), react_1.default.createElement("use", {
+    href: "#line",
+    transform: "rotate(157.5, 256, 256)"
+  }), react_1.default.createElement("use", {
+    href: "#line",
+    transform: "rotate(202.5, 256, 256)"
+  }), react_1.default.createElement("use", {
+    href: "#line",
+    transform: "rotate(247.5, 256, 256)"
+  }), react_1.default.createElement("use", {
+    href: "#line",
+    transform: "rotate(292.5, 256, 256)"
+  }), react_1.default.createElement("use", {
+    href: "#line",
+    transform: "rotate(337.5, 256, 256)"
+  }), latestMps > 0 && react_1.default.createElement("g", null, react_1.default.createElement("path", {
+    className: "direction-indicator",
+    id: "directionIndicator",
+    d: "M 258 35 L 260 256 L 314 314 L 256 480 L 197 314 L 252 256 L 254 35 Z",
+    style: {
+      transform: "rotate(" + latestDir + "deg)"
+    }
+  }), react_1.default.createElement("circle", {
+    className: "center-circle",
+    id: "centerCircle",
+    cx: "256",
+    cy: "256",
+    r: "82.9"
+  }), react_1.default.createElement("text", {
+    className: "velocity-text",
+    style: {
+      stroke: "hsl(" + hueForSpeed(latestMps) + ", 100%, 50%)",
+      fill: "hsla(" + hueForSpeed(latestMps) + ", 100%, 50%, 0.25)"
+    },
+    id: "velocityText",
+    x: "256",
+    y: "266"
+  }, Math.round(latestMps)), react_1.default.createElement("text", {
+    className: "velocity-legend",
+    x: "256",
+    y: "325"
+  }, latestDir, "\xB0")), react_1.default.createElement("circle", {
+    className: "ring",
+    cx: 256,
+    cy: 256,
+    r: 254
+  }), react_1.default.createElement("g", {
+    id: "speed-legend"
+  }, [0, 5, 10, 15, 20, 25].map(function (s, i) {
+    return react_1.default.createElement("text", {
+      key: s,
+      x: 512 / 6 * i + 512 / 12,
+      y: 511,
+      fill: "hsl(" + hueForSpeed(s) + ", 100%, 50%)",
+      fontSize: "1.5em",
+      textAnchor: "middle"
+    }, s);
+  })));
+};
+
+exports.default = Windchart;
+},{"react":"node_modules/react/index.js","./Windchart.css":"src/components/Windchart.css"}],"src/components/Graph.css":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"_css_loader":"node_modules/parcel-bundler/src/builtins/css-loader.js"}],"src/components/Graph.tsx":[function(require,module,exports) {
+"use strict";
+
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
+};
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var react_1 = __importStar(require("react"));
+
+require("./Graph.css");
+
+var width = 256,
+    height = 158.2464,
+    graphHeight = 100;
+
+var Graph = function Graph(_a) {
+  var label = _a.label,
+      values = _a.values;
+  var maxValue = Math.max.apply(Math, values.map(function (v) {
+    return v.wind_gust;
+  })) || 5;
+  console.log({
+    maxValue: maxValue
+  });
+  return react_1.default.createElement("svg", {
+    id: "Graph",
+    xmlns: "http://www.w3.org/2000/svg",
+    viewBox: "0 0 " + width + " " + height
   }, react_1.default.createElement("rect", {
     id: "background",
     x: 1,
     y: 1,
-    width: 254,
-    height: 126,
+    width: width - 2,
+    height: height - 2,
     rx: 8
   }), react_1.default.createElement("text", {
     id: "label",
     x: 128,
-    y: 35
-  }, label), react_1.default.createElement("text", {
-    id: "value",
-    x: 128,
-    y: 84,
-    dominantBaseline: "middle"
-  }, value, unit && " " + unit));
+    y: 30
+  }, label), react_1.default.createElement("rect", {
+    id: "graph-bg",
+    x: 2,
+    y: 35,
+    width: width - 4,
+    height: graphHeight
+  }), values.map(function (v, i) {
+    return react_1.default.createElement("g", {
+      key: i,
+      id: "bar-graph"
+    }, v.wind_gust && react_1.default.createElement("rect", {
+      x: 2 + i * ((width - 4) / values.length),
+      y: 135 - graphHeight / maxValue * v.wind_gust,
+      width: (width - 4) / values.length,
+      height: graphHeight / maxValue * v.wind_gust,
+      fill: "hsl(0, 100%, 50%)"
+    }), v.wind_avg && react_1.default.createElement("rect", {
+      x: 2 + i * ((width - 4) / values.length),
+      y: 135 - graphHeight / maxValue * v.wind_avg,
+      width: (width - 4) / values.length,
+      height: graphHeight / maxValue * v.wind_avg,
+      fill: "hsl(270, 100%, 50%)"
+    }), v.wind_lull && react_1.default.createElement("rect", {
+      x: 2 + i * ((width - 4) / values.length),
+      y: 135 - graphHeight / maxValue * v.wind_lull,
+      width: (width - 4) / values.length,
+      height: graphHeight / maxValue * v.wind_lull,
+      fill: "hsl(180, 100%, 50%)"
+    }));
+  }));
 };
 
-exports.default = Stat;
-},{"react":"node_modules/react/index.js","./Stat.css":"src/components/Stat.css"}],"src/App.css":[function(require,module,exports) {
+exports.default = react_1.memo(Graph);
+},{"react":"node_modules/react/index.js","./Graph.css":"src/components/Graph.css"}],"src/App.css":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
 },{"_css_loader":"node_modules/parcel-bundler/src/builtins/css-loader.js"}],"src/App.tsx":[function(require,module,exports) {
 "use strict";
+
+var __assign = this && this.__assign || function () {
+  __assign = Object.assign || function (t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+      s = arguments[i];
+
+      for (var p in s) {
+        if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+      }
+    }
+
+    return t;
+  };
+
+  return __assign.apply(this, arguments);
+};
 
 var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
   if (k2 === undefined) k2 = k;
@@ -28897,9 +29121,11 @@ Object.defineProperty(exports, "__esModule", {
 
 var react_1 = __importStar(require("react"));
 
-var Guage_1 = __importDefault(require("./components/Guage"));
-
 var Stat_1 = __importDefault(require("./components/Stat"));
+
+var Windchart_1 = __importDefault(require("./components/Windchart"));
+
+var Graph_1 = __importDefault(require("./components/Graph"));
 
 var context_1 = __importDefault(require("./components/SocketContext/context"));
 
@@ -28919,27 +29145,39 @@ var App = function App() {
   var latest_rapid_wind = rapid_wind[rapid_wind.length - 1];
   return react_1.default.createElement("div", {
     id: "App"
+  }, react_1.default.createElement("div", {
+    className: "container flex-column"
+  }, react_1.default.createElement("div", {
+    className: "flex-row"
   }, react_1.default.createElement("div", null, react_1.default.createElement(Stat_1.default, {
-    value: 51.5,
+    value: (latest_obs_st.air_temperature * 1.8 + 32).toFixed(1),
     label: "Temperature",
     unit: "\xB0F"
   })), react_1.default.createElement("div", null, react_1.default.createElement(Stat_1.default, {
-    value: 71.8,
+    value: latest_obs_st.relative_humidity,
     label: "Humidity",
     unit: "%"
-  })), react_1.default.createElement("div", null, react_1.default.createElement(Guage_1.default, {
-    value: Number((latest_obs_st.air_temperature * 1.8 + 32).toFixed(1)),
-    title: "Temperature",
-    unit: "\xB0F"
-  })), react_1.default.createElement("div", null, react_1.default.createElement(Guage_1.default, {
-    value: latest_obs_st.relative_humidity,
-    title: "Humidity",
-    unit: "%"
-  })));
+  }))), react_1.default.createElement("div", null, react_1.default.createElement(Windchart_1.default, {
+    rapid_wind: rapid_wind.map(function (e) {
+      return __assign(__assign({}, e), {
+        mps: e.mps * 2.237
+      });
+    })
+  })), react_1.default.createElement("div", null, react_1.default.createElement(Graph_1.default, {
+    label: "Winds",
+    values: obs_st.map(function (e) {
+      return {
+        time: e.time,
+        wind_lull: e.wind_lull * 2.237,
+        wind_avg: e.wind_avg * 2.237,
+        wind_gust: e.wind_gust * 2.237
+      };
+    })
+  }))));
 };
 
 exports.default = App;
-},{"react":"node_modules/react/index.js","./components/Guage":"src/components/Guage.tsx","./components/Stat":"src/components/Stat.tsx","./components/SocketContext/context":"src/components/SocketContext/context.tsx","./App.css":"src/App.css"}],"src/index.tsx":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","./components/Stat":"src/components/Stat.tsx","./components/Windchart":"src/components/Windchart.tsx","./components/Graph":"src/components/Graph.tsx","./components/SocketContext/context":"src/components/SocketContext/context.tsx","./App.css":"src/App.css"}],"src/index.tsx":[function(require,module,exports) {
 "use strict";
 
 var __importDefault = this && this.__importDefault || function (mod) {

@@ -1,19 +1,19 @@
 :root {
   --base-hue: 220;
 }
-svg#Stat #background {
+svg#Graph #background {
   fill: hsl(var(--base-hue), 100%, 20%);
   stroke: hsl(var(--base-hue), 100%, 75%);
 }
 
-svg#Stat #label {
+svg#Graph #label {
   fill: hsl(var(--base-hue), 100%, 75%);
   font-size: 30px;
   font-weight: bold;
   text-anchor: middle;
 }
 
-svg#Stat #value {
+svg#Graph #value {
   fill: hsl(calc(var(--base-hue) - 180), 100%, 50%);
   font-size: 72px;
   font-weight: bold;
