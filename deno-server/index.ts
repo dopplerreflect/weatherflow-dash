@@ -7,7 +7,6 @@ import {
   path,
 } from "./deps.ts";
 import { handleWs } from "./websocket.ts";
-// import { getCache } from "./database.ts";
 
 const script = import.meta.url.replace(/^file:\/\//, "");
 const { args } = Deno;
@@ -16,9 +15,6 @@ const argPort = flags.parse(args).port;
 const port = argPort ? Number(argPort) : DEFAULT_PORT;
 
 console.log(`Deno server listening on port ${port}`);
-
-// const temp = await getCache();
-// console.log(temp);
 
 listenAndServe({ port }, async (req) => {
   let body = "";
@@ -59,7 +55,6 @@ listenAndServe({ port }, async (req) => {
       const ext = match && match[1];
       if (ext) headers.set("content-type", mimeTypes[ext]);
       try {
-        // body = await Deno.readTextFile(`../react-app/dist/${req.url}`);
         body = await Deno.readTextFile(
           path.join(path.dirname(script), "..", "react-app", "dist", req.url),
         );
