@@ -1,3 +1,4 @@
+//@ts-nocheck
 import { config } from "./deps.ts";
 
 const ENV = config();
