@@ -41,6 +41,23 @@ const Graph: React.FC<WindGraphProps> = ({ label, values }) => {
       />
       <text id="label" x={128} y={30}>{label}</text>
       <rect id="graph-bg" x={2} y={35} width={width - 4} height={graphHeight} />
+      <g>
+        {[...Array.from(Array(25))].map((_, n) => {
+          const y = (n + 1);
+          if (y < maxValue) {
+            console.log({ y });
+            return <line
+              key={n}
+              x1={2}
+              y1={135 - (graphHeight / maxValue) * y}
+              x2={254}
+              y2={135 - (graphHeight / maxValue) * y}
+              stroke={`hsl(${hueForSpeed(y)}, 100%, 50%)`}
+            />;
+          }
+        })}
+      </g>
+
       {values.map((v, i) => (
         <g key={i} id="bar-graph">
           {v.wind_gust && (

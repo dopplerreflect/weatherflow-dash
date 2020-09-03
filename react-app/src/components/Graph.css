@@ -19,3 +19,11 @@ svg#Graph #value {
   font-weight: bold;
   text-anchor: middle;
 }
+
+svg#Graph #graph-bg {
+  fill: hsl(var(--base-hue), 100%, 5%);
+}
+
+svg#Graph #bar-graph > rect {
+  fill-opacity: 0.5;
+}
