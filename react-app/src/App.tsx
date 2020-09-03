@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import Guage from "./components/Guage";
+// import Guage from "./components/Guage";
 import Stat from "./components/Stat";
 import Windchart from "./components/Windchart";
 import Graph from "./components/Graph";

@@ -1,18 +1,30 @@
 import React, { memo } from "react";
 import "./Graph.css";
 
+const hueForSpeed = (mph: number) => {
+  if (mph >= 25) {
+    return -82.5;
+  }
+  return 230 - Number(mph) * 12.5;
+};
+
 const width = 256,
   height = 158.2464,
   graphHeight = 100;
 
-interface GraphProps {
-  label: string;
-  values: DecodedObsSt[];
+interface ValuesProps {
+  wind_gust: number;
+  wind_avg: number;
+  wind_lull: number;
 }
 
-const Graph: React.FC<GraphProps> = ({ label, values }) => {
+export interface WindGraphProps {
+  label: string;
+  values: ValuesProps[];
+}
+
+const Graph: React.FC<WindGraphProps> = ({ label, values }) => {
   const maxValue = Math.max(...values.map((v) => v.wind_gust)) || 5;
-  console.log({ maxValue });
   return (
     <svg
       id="Graph"
@@ -37,7 +49,8 @@ const Graph: React.FC<GraphProps> = ({ label, values }) => {
               y={135 - ((graphHeight / maxValue) * v.wind_gust)}
               width={(width - 4) / values.length}
               height={(graphHeight / maxValue) * v.wind_gust}
-              fill={`hsl(0, 100%, 50%)`}
+              fill={`hsl(${hueForSpeed(v.wind_gust)}, 50%, 50%)`}
+              stroke={`hsl(${hueForSpeed(v.wind_gust)}, 100%, 75%)`}
             />
           )}
           {v.wind_avg && (
@@ -46,7 +59,8 @@ const Graph: React.FC<GraphProps> = ({ label, values }) => {
               y={135 - ((graphHeight / maxValue) * v.wind_avg)}
               width={(width - 4) / values.length}
               height={(graphHeight / maxValue) * v.wind_avg}
-              fill={`hsl(270, 100%, 50%)`}
+              fill={`hsl(${hueForSpeed(v.wind_avg)}, 50%, 50%)`}
+              stroke={`hsl(${hueForSpeed(v.wind_avg)}, 100%, 87.5%)`}
             />
           )}
           {v.wind_lull && (
@@ -55,7 +69,8 @@ const Graph: React.FC<GraphProps> = ({ label, values }) => {
               y={135 - ((graphHeight / maxValue) * v.wind_lull)}
               width={(width - 4) / values.length}
               height={(graphHeight / maxValue) * v.wind_lull}
-              fill={`hsl(180, 100%, 50%)`}
+              fill={`hsl(${hueForSpeed(v.wind_lull)}, 50%, 50%)`}
+              stroke={`hsl(${hueForSpeed(v.wind_lull)}, 100%, 100%)`}
             />
           )}
         </g>
