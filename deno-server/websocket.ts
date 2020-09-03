@@ -21,12 +21,16 @@ const endpoint =
 
 const clientsMap = new Map();
 
-let data: WfData = {
-  summary: {},
-  rapid_wind: [],
-  obs_st: [],
-};
+let data: WfData;
 data = await getCache();
+
+if (!data.summary) {
+  data = {
+    summary: {},
+    rapid_wind: [],
+    obs_st: [],
+  };
+}
 
 const sendMessage = (message: any) => {
   // console.log(message);
