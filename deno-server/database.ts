@@ -8,7 +8,7 @@ import { Client } from "https://deno.land/x/postgres/mod.ts";
 const client = new Client(
   ENV.DEVELOPMENT
     ? "postgres://app:app@localhost"
-    : "postgres://postgresql-round-57903",
+    : Deno.env.toObject()["DATABASE_URL"],
 );
 
 await client.connect();
