@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import Guage from "./components/Guage";
+import Stat from "./components/Stat";
 import Windchart from "./components/Windchart";
 import SocketContext from "./components/SocketContext/context";
 import "./App.css";
@@ -12,10 +13,16 @@ const App = () => {
   return (
     <div id="App">
       <div>
+        <Stat value={51.5} label="Temperature" unit="°F" />
+      </div>
+      <div>
+        <Stat value={71.8} label="Humidity" unit="%" />
+      </div>
+      {/* <div>
         <Windchart
           rapid_wind={rapid_wind.map((e) => ({ ...e, mps: e.mps * 2.237 }))}
         />
-      </div>
+      </div> */}
       <div>
         <Guage
           value={Number((latest_obs_st.air_temperature * 1.8 + 32).toFixed(1))}
