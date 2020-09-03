@@ -12,15 +12,14 @@ const width = 256,
   height = 158.2464,
   graphHeight = 100;
 
-interface ValuesProps {
-  wind_gust: number;
-  wind_avg: number;
-  wind_lull: number;
-}
-
-export interface WindGraphProps {
+interface WindGraphProps {
   label: string;
-  values: ValuesProps[];
+  values: Array<{
+    time: number;
+    wind_gust: number;
+    wind_avg: number;
+    wind_lull: number;
+  }>;
 }
 
 const Graph: React.FC<WindGraphProps> = ({ label, values }) => {
