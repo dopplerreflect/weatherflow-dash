@@ -5,6 +5,7 @@ import {
   isWebSocketCloseEvent,
 } from "./deps.ts";
 import { WfData, WfMessageObj } from "./types.d.ts";
+import { setCache, getCache } from "./database.ts";
 const ENV = config();
 
 // used to truncate data length
@@ -25,13 +26,7 @@ let data: WfData = {
   rapid_wind: [],
   obs_st: [],
 };
-let jsonText = JSON.stringify(data);
-try {
-  jsonText = await Deno.readTextFile("data.json");
-} catch (e) {
-  console.log("data.json did not exist");
-}
-data = JSON.parse(jsonText);
+data = await getCache();
 
 const sendMessage = (message: any) => {
   // console.log(message);
@@ -60,6 +55,7 @@ wsClient.on("close", (event: any) => {
 
 wsClient.on("message", async function (message: string) {
   const messageObj: WfMessageObj = JSON.parse(message);
+  let cacheRes;
   console.log(
     messageObj.type,
     messageObj.type === "obs_st"
@@ -74,6 +70,9 @@ wsClient.on("message", async function (message: string) {
       data.rapid_wind.length > MAX_RAPID_WIND_ENTRIES &&
         data.rapid_wind.shift();
       sendMessage({ type: "rapid_wind", rapid_wind: data.rapid_wind });
+      // await Deno.writeTextFile("data.json", JSON.stringify(data));
+      cacheRes = await setCache(JSON.stringify(data));
+      // console.log(cacheRes.command);
       break;
     case "obs_st":
       data.obs_st.push(messageObj.obs[0]);
@@ -81,10 +80,12 @@ wsClient.on("message", async function (message: string) {
       sendMessage({ type: "obs_st", obs_st: data.obs_st });
       data.summary = messageObj.summary;
       sendMessage({ type: "summary", summary: data.summary });
+      // await Deno.writeTextFile("data.json", JSON.stringify(data));
+      cacheRes = await setCache(JSON.stringify(data));
+      // console.log(cacheRes.command);
     default:
       break;
   }
-  await Deno.writeTextFile("data.json", JSON.stringify(data));
 });
 
 const sendStartRequests = (): void => {

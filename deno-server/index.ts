@@ -7,6 +7,7 @@ import {
   path,
 } from "./deps.ts";
 import { handleWs } from "./websocket.ts";
+// import { getCache } from "./database.ts";
 
 const script = import.meta.url.replace(/^file:\/\//, "");
 const { args } = Deno;
@@ -15,6 +16,9 @@ const argPort = flags.parse(args).port;
 const port = argPort ? Number(argPort) : DEFAULT_PORT;
 
 console.log(`Deno server listening on port ${port}`);
+
+// const temp = await getCache();
+// console.log(temp);
 
 listenAndServe({ port }, async (req) => {
   let body = "";
