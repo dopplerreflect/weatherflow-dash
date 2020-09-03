@@ -75,14 +75,17 @@ const Windchart: React.FC<Props> = ({ rapid_wind }) => {
             r={3}
             style={{
               fill: `hsla(
-                    ${hueForSpeed(rw.mps)},
-                    ${(100 / rapid_wind.length) * i}%,
-                    50%,
-                    ${(1 / rapid_wind.length) * i})`,
+                      ${hueForSpeed(rw.mps)},
+                      ${(100 / rapid_wind.length) * i}%,
+                      50%,
+                      ${(1 / rapid_wind.length) * i})`,
             }}
           />
         ))}
       </g>
+
+      <rect id="speed-legend-bg" x="0" y="491" width="512" height="21" />
+
       <g className="text">
         <text x="243" y="36">
           N
@@ -145,12 +148,11 @@ const Windchart: React.FC<Props> = ({ rapid_wind }) => {
       <circle className="ring" cx={256} cy={256} r={254} />
 
       <g id="speed-legend">
-        <rect x="0" y="491" width="512" height="21" />
         {[0, 5, 10, 15, 20, 25].map((s, i) => (
           <text
             key={s}
             x={(512 / 6) * i + (512 / 12)}
-            y={512}
+            y={511}
             fill={`hsl(${hueForSpeed(s)}, 100%, 50%)`}
             fontSize="1.5em"
             textAnchor="middle"
