@@ -28880,8 +28880,8 @@ var Windchart = function Windchart(_a) {
   })), react_1.default.createElement("g", null, rapid_wind.map(function (rw, i) {
     return react_1.default.createElement("circle", {
       key: i,
-      cx: 256 + 256 / maxMps * rw.mps * Math.cos((rw.dir - 90) * (Math.PI / 180)) || 256,
-      cy: 256 + 256 / maxMps * rw.mps * Math.sin((rw.dir - 90) * (Math.PI / 180)) || 256,
+      cx: 256 + 251 / maxMps * rw.mps * Math.cos((rw.dir - 90) * (Math.PI / 180)) || 256,
+      cy: 256 + 251 / maxMps * rw.mps * Math.sin((rw.dir - 90) * (Math.PI / 180)) || 256,
       r: 3,
       style: {
         fill: "hsla(\n                    " + hueForSpeed(rw.mps) + ",\n                    " + 100 / rapid_wind.length * i + "%,\n                    50%,\n                    " + 1 / rapid_wind.length * i + ")"
