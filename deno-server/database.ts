@@ -24,7 +24,8 @@ export const getCache = async () => {
 
 export const setCache = async (data: string) => {
   const result = await client.query(
-    `update wf_cache set data='${data}' where id=1;`,
+    "update wf_cache set data=$1 where id=1;",
+    data,
   );
   return result;
 };
