@@ -44,7 +44,6 @@ const Graph: React.FC<WindGraphProps> = ({ label, values }) => {
         {[...Array.from(Array(25))].map((_, n) => {
           const y = (n + 1);
           if (y < maxValue) {
-            console.log({ y });
             return <line
               key={n}
               x1={2}

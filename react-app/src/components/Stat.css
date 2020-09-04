@@ -1,6 +1,7 @@
 :root {
   --base-hue: 220;
 }
+
 svg#Stat #background {
   fill: hsl(var(--base-hue), 100%, 20%);
   stroke: hsl(var(--base-hue), 100%, 75%);
