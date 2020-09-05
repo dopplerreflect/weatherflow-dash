@@ -67,10 +67,10 @@ const Windchart: React.FC<Props> = ({ rapid_wind }) => {
           <circle
             key={i}
             cx={256 +
-                (256 / maxMps) * rw.mps *
+                (250 / maxMps) * rw.mps *
                   Math.cos((rw.dir - 90) * (Math.PI / 180)) || 256}
             cy={256 +
-                (256 / maxMps) * rw.mps *
+                (250 / maxMps) * rw.mps *
                   Math.sin((rw.dir - 90) * (Math.PI / 180)) || 256}
             r={3}
             style={{
