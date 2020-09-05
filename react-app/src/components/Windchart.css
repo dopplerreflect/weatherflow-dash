@@ -11,8 +11,7 @@ svg#Windchart .hashmark {
 svg#Windchart .text {
   fill: hsl(var(--base-hue), 100%, 75%);
   font-weight: bold;
-  font-family: 'Courier New', Courier, monospace;
-  font-size: 3rem;
+  font-size: 2rem;
 }
 svg#Windchart .velocity-text {
   stroke-width: 3;

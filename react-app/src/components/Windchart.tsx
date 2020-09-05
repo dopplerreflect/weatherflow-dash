@@ -84,19 +84,19 @@ const Windchart: React.FC<Props> = ({ rapid_wind }) => {
         ))}
       </g>
 
-      <rect id="speed-legend-bg" x="0" y="491" width="512" height="21" />
+      {/* <rect id="speed-legend-bg" x="0" y="491" width="512" height="21" /> */}
 
       <g className="text">
-        <text x="243" y="45">
+        <text x="243" y="34">
           N
         </text>
-        <text x="472" y="269">
+        <text x="484" y="269">
           E
         </text>
-        <text x="243" y="506">
+        <text x="243" y="508">
           S
         </text>
-        <text x="7" y="269">
+        <text x="4" y="269">
           W
         </text>
       </g>
