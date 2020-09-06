@@ -40,7 +40,7 @@ const Graph: React.FC<WindGraphProps> = ({ label, values }) => {
       />
       <text id="label" x={width / 2} y={height / 11}>{label}</text>
       <rect id="graph-bg" x={2} y={35} width={width - 4} height={graphHeight} />
-      <g>
+      <g id="y-axis-lines">
         {[...Array.from(Array(25))].map((_, n) => {
           const y = (n + 1);
           if (y < maxValue) {
@@ -56,40 +56,77 @@ const Graph: React.FC<WindGraphProps> = ({ label, values }) => {
         })}
       </g>
 
-      {values.map((v, i) => (
-        <g key={i} id="bar-graph">
-          {v.wind_gust && (
-            <rect
-              x={2 + i * ((width - 6) / values.length)}
-              y={graphHeight + 35 - ((graphHeight / maxValue) * v.wind_gust)}
-              width={(width - 6) / values.length}
-              height={(graphHeight / maxValue) * v.wind_gust}
-              fill={`hsl(${hueForSpeed(v.wind_gust)}, 100%, 50%)`}
-              stroke={`hsla(${hueForSpeed(v.wind_gust)}, 100%, 50%, 1)`}
-            />
-          )}
-          {v.wind_avg && (
-            <rect
-              x={2 + i * ((width - 6) / values.length)}
-              y={graphHeight + 35 - ((graphHeight / maxValue) * v.wind_avg)}
-              width={(width - 6) / values.length}
-              height={(graphHeight / maxValue) * v.wind_avg}
-              fill={`hsl(${hueForSpeed(v.wind_avg)}, 100%, 50%)`}
-              stroke={`hsla(${hueForSpeed(v.wind_avg)}, 100%, 50%, 1)`}
-            />
-          )}
-          {v.wind_lull && (
-            <rect
-              x={2 + i * ((width - 6) / values.length)}
-              y={graphHeight + 35 - ((graphHeight / maxValue) * v.wind_lull)}
-              width={(width - 6) / values.length}
-              height={(graphHeight / maxValue) * v.wind_lull}
-              fill={`hsl(${hueForSpeed(v.wind_lull)}, 100%, 50%)`}
-              stroke={`hsla(${hueForSpeed(v.wind_lull)}, 100%, 50%, 1)`}
-            />
-          )}
-        </g>
-      ))}
+      <g id="bar-graph">
+        {values.map((v, i) => (
+          <g key={i} className="bar">
+            {v.wind_gust && (
+              <rect
+                x={2 + i * ((width - 6) / values.length)}
+                y={graphHeight + 35 - ((graphHeight / maxValue) * v.wind_gust)}
+                width={(width - 6) / values.length}
+                height={(graphHeight / maxValue) * v.wind_gust}
+                fill={`hsl(${hueForSpeed(v.wind_gust)}, 100%, 50%)`}
+                stroke={`hsla(${hueForSpeed(v.wind_gust)}, 100%, 50%, 1)`}
+              />
+            )}
+            {v.wind_avg && (
+              <rect
+                x={2 + i * ((width - 6) / values.length)}
+                y={graphHeight + 35 - ((graphHeight / maxValue) * v.wind_avg)}
+                width={(width - 6) / values.length}
+                height={(graphHeight / maxValue) * v.wind_avg}
+                fill={`hsl(${hueForSpeed(v.wind_avg)}, 100%, 50%)`}
+                stroke={`hsla(${hueForSpeed(v.wind_avg)}, 100%, 50%, 1)`}
+              />
+            )}
+            {v.wind_lull && (
+              <rect
+                x={2 + i * ((width - 6) / values.length)}
+                y={graphHeight + 35 - ((graphHeight / maxValue) * v.wind_lull)}
+                width={(width - 6) / values.length}
+                height={(graphHeight / maxValue) * v.wind_lull}
+                fill={`hsl(${hueForSpeed(v.wind_lull)}, 100%, 50%)`}
+                stroke={`hsla(${hueForSpeed(v.wind_lull)}, 100%, 50%, 1)`}
+              />
+            )}
+          </g>
+        ))}
+      </g>
+      <g id="foo">
+        {values.map((_, i) => {
+          const x = (2 + (((width - 6) / values.length) / 2) +
+            i * ((width - 6) / values.length));
+          return i % 10 === 0 && i !== 0 && (
+            <g className="x-axis-mark">
+              <line
+                x1={2 + (((width - 6) / values.length) / 2) +
+                  i * ((width - 6) / values.length)}
+                y1={graphHeight + 36}
+                x2={2 + (((width - 6) / values.length) / 2) +
+                  i * ((width - 6) / values.length)}
+                y2={graphHeight + 45}
+                stroke="white"
+              />
+              <text
+                x={x}
+                y={graphHeight + 64}
+                fill="white"
+                textAnchor="middle"
+              >
+                {values.length - i}
+              </text>
+              <text
+                x={width / 2}
+                y={height - 16}
+                fill="white"
+                textAnchor="middle"
+              >
+                Minutes Ago
+              </text>
+            </g>
+          );
+        })}
+      </g>
     </svg>
   );
 };
