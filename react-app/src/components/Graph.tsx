@@ -92,7 +92,25 @@ const Graph: React.FC<WindGraphProps> = ({ label, values }) => {
           </g>
         ))}
       </g>
-      <g id="foo">
+      <g id="y-axis-legend">
+        {[...Array.from(Array(25))].map((_, n) => {
+          const y = (n + 1);
+          if (y < maxValue) {
+            return (<text
+              key={n}
+              x={2}
+              y={graphHeight + 35 - (graphHeight / maxValue) * y}
+              stroke={`hsla(210, 50%, 0%, 0.9)`}
+              fill={`hsl(${hueForSpeed(y)}, 100%, 50%)`}
+              fontWeight="bold"
+              dominantBaseline="middle"
+            >
+              {y}mph
+            </text>);
+          }
+        })}
+      </g>
+      <g id="x-axis-legend">
         {values.map((_, i) => {
           const x = (2 + (((width - 6) / values.length) / 2) +
             i * ((width - 6) / values.length));
