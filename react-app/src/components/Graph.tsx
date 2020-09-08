@@ -125,7 +125,6 @@ const Graph: React.FC<WindGraphProps> = ({ label, values }) => {
                   y2={graphHeight + 35 -
                     ((graphHeight / maxValue) * v.wind_lull)}
                   stroke="white"
-                  strokeWidth={7}
                 />
               </>
             )}
