@@ -23,7 +23,7 @@ interface WindGraphProps {
 }
 
 const Graph: React.FC<WindGraphProps> = ({ label, values }) => {
-  const maxValue = Math.max(...values.map((v) => v.wind_gust)) || 5;
+  const maxValue = Math.max(...values.map((v) => v.wind_gust)) || 16;
   return (
     <svg
       id="Graph"
@@ -95,13 +95,14 @@ const Graph: React.FC<WindGraphProps> = ({ label, values }) => {
       <g id="y-axis-legend">
         {[...Array.from(Array(25))].map((_, n) => {
           const y = (n + 1);
-          if (y < maxValue) {
+          if (y < maxValue && y % 5 === 0) {
             return (<text
               key={n}
               x={2}
               y={graphHeight + 35 - (graphHeight / maxValue) * y}
-              stroke={`hsla(210, 50%, 0%, 0.9)`}
+              // stroke={`hsla(210, 50%, 0%, 0.9)`}
               fill={`hsl(${hueForSpeed(y)}, 100%, 50%)`}
+              fontSize={`0.5em`}
               fontWeight="bold"
               dominantBaseline="middle"
             >
@@ -127,20 +128,21 @@ const Graph: React.FC<WindGraphProps> = ({ label, values }) => {
               />
               <text
                 x={x}
-                y={graphHeight + 64}
+                y={graphHeight + 52}
                 fill="white"
                 textAnchor="middle"
+                fontSize={`0.5em`}
               >
-                {values.length - i}
+                {values.length - i}min
               </text>
-              <text
+              {/* <text
                 x={width / 2}
                 y={height - 16}
                 fill="white"
                 textAnchor="middle"
               >
                 Minutes Ago
-              </text>
+              </text> */}
             </g>
           );
         })}
