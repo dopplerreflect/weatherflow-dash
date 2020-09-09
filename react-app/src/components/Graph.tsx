@@ -134,13 +134,19 @@ const Graph: React.FC<WindGraphProps> = ({ label, values }) => {
       <g id="y-axis-legend">
         {[...Array.from(Array(25))].map((_, n) => {
           const y = (n + 1);
-          if (y < maxValue && maxValue === 6 ? true : y % 5 === 0) {
+          if (
+            y < maxValue &&
+            (maxValue === 6 ? true : y % Math.round(maxValue / 5) === 0)
+          ) {
             return (<text
               key={n}
               x={2}
               y={graphHeight + 35 - (graphHeight / maxValue) * y}
               // stroke={`hsla(210, 50%, 0%, 0.9)`}
-              fill={`hsl(${hueForSpeed(y)}, 100%, 50%)`}
+              // fill={`hsl(${hueForSpeed(y)}, 100%, 50%)`}
+              // stroke="black"
+              // strokeWidth="0.5"
+              fill="white"
               fontSize={`0.5em`}
               fontWeight="bold"
               dominantBaseline="middle"
@@ -155,7 +161,7 @@ const Graph: React.FC<WindGraphProps> = ({ label, values }) => {
           const x = (2 + (((width - 6) / values.length) / 2) +
             i * ((width - 6) / values.length));
           return i % 10 === 0 && i !== 0 && (
-            <g className="x-axis-mark">
+            <g className="x-axis-mark" key={i}>
               <line
                 x1={2 + (((width - 6) / values.length) / 2) +
                   i * ((width - 6) / values.length)}
