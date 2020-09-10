@@ -1,0 +1,36 @@
+#Gridtest {
+  --row-height: calc((100vh / 4) - 5px);
+  display: grid;
+  width: 100vw;
+  height: 100vh;
+  grid-template-columns: calc(100vh / 4) calc((100vh / 4) * 3) 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  grid-template-areas:
+    'clock     anemometer rest'
+    'temp      anemometer rest'
+    'humidity  anemometer rest'
+    'feelslike windgraph  rest';
+  gap: 5px;
+  div {
+    background-color: hsl(210, 50%, 5%);
+    border: 1px solid hsl(210, 50%, 30%);
+  }
+  #clock {
+    grid-area: clock;
+  }
+  #temp {
+    grid-area: temp;
+  }
+  #humidity {
+    grid-area: humidity;
+  }
+  #feelslike {
+    grid-area: feelslike;
+  }
+  #anemometer {
+    grid-area: anemometer;
+  }
+  #rest {
+    grid-area: rest;
+  }
+}

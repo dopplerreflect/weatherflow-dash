@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, { memo, useState } from "react";
 import "./Graph.css";
 
 const hueForSpeed = (mph: number) => {
@@ -8,9 +8,9 @@ const hueForSpeed = (mph: number) => {
   return 230 - Number(mph) * 12.5;
 };
 
-const width = 512,
-  height = 316.4928,
-  graphHeight = (height / 9) * 6;
+// const width = 512,
+//   height = 316.4928,
+//   graphHeight = (height / 9) * 6;
 
 interface WindGraphProps {
   label: string;
@@ -22,7 +22,10 @@ interface WindGraphProps {
   }>;
 }
 
-const Graph: React.FC<WindGraphProps> = ({ label, values }) => {
+const Graph: React.FC<WindGraphProps> = function ({ label, values }) {
+  const width = window.innerHeight * 0.75;
+  const height = window.innerHeight * 0.25;
+  const graphHeight = height - 21;
   let maxValue = Math.max(...values.map((v) => v.wind_gust)) || 16;
   maxValue = maxValue < 6 ? 6 : maxValue;
   return (
@@ -30,29 +33,23 @@ const Graph: React.FC<WindGraphProps> = ({ label, values }) => {
       id="Graph"
       xmlns="http://www.w3.org/2000/svg"
       viewBox={`0 0 ${width} ${height}`}
+      width={"100%"}
+      height={"100%"}
     >
-      <rect
-        id="background"
-        x={1}
-        y={1}
-        width={width - 2}
-        height={height - 2}
-        rx={8}
-      />
-      <text id="label" x={width / 2} y={height / 11}>{label}</text>
-      <rect id="graph-bg" x={2} y={35} width={width - 4} height={graphHeight} />
       <g id="y-axis-lines">
         {[...Array.from(Array(25))].map((_, n) => {
-          const y = (n + 1);
+          const y = n + 1;
           if (y < maxValue) {
-            return <line
-              key={n}
-              x1={2}
-              y1={graphHeight + 35 - (graphHeight / maxValue) * y}
-              x2={width - 2}
-              y2={graphHeight + 35 - (graphHeight / maxValue) * y}
-              stroke={`hsl(${hueForSpeed(y)}, 100%, 50%)`}
-            />;
+            return (
+              <line
+                key={n}
+                x1={2}
+                y1={graphHeight - (graphHeight / maxValue) * y}
+                x2={width - 2}
+                y2={graphHeight - (graphHeight / maxValue) * y}
+                stroke={`hsl(${hueForSpeed(y)}, 100%, 50%)`}
+              />
+            );
           }
         })}
       </g>
@@ -64,8 +61,7 @@ const Graph: React.FC<WindGraphProps> = ({ label, values }) => {
               <>
                 <rect
                   x={2 + i * ((width - 6) / values.length)}
-                  y={graphHeight + 35 -
-                    ((graphHeight / maxValue) * v.wind_gust)}
+                  y={graphHeight - (graphHeight / maxValue) * v.wind_gust}
                   width={(width - 6) / values.length}
                   height={(graphHeight / maxValue) * v.wind_gust}
                   fill={`hsla(${hueForSpeed(v.wind_gust)}, 100%, 50%, 0.5)`}
@@ -73,12 +69,11 @@ const Graph: React.FC<WindGraphProps> = ({ label, values }) => {
                 />
                 <line
                   x1={2 + i * ((width - 6) / values.length)}
-                  x2={(2 + i * ((width - 6) / values.length)) +
-                    ((width - 6) / values.length)}
-                  y1={graphHeight + 35 -
-                    ((graphHeight / maxValue) * v.wind_gust)}
-                  y2={graphHeight + 35 -
-                    ((graphHeight / maxValue) * v.wind_gust)}
+                  x2={2 +
+                    i * ((width - 6) / values.length) +
+                    (width - 6) / values.length}
+                  y1={graphHeight - (graphHeight / maxValue) * v.wind_gust}
+                  y2={graphHeight - (graphHeight / maxValue) * v.wind_gust}
                   stroke="white"
                 />
               </>
@@ -87,7 +82,7 @@ const Graph: React.FC<WindGraphProps> = ({ label, values }) => {
               <>
                 <rect
                   x={2 + i * ((width - 6) / values.length)}
-                  y={graphHeight + 35 - ((graphHeight / maxValue) * v.wind_avg)}
+                  y={graphHeight - (graphHeight / maxValue) * v.wind_avg}
                   width={(width - 6) / values.length}
                   height={(graphHeight / maxValue) * v.wind_avg}
                   fill={`hsla(${hueForSpeed(v.wind_avg)}, 100%, 50%, 0.5)`}
@@ -95,12 +90,11 @@ const Graph: React.FC<WindGraphProps> = ({ label, values }) => {
                 />
                 <line
                   x1={2 + i * ((width - 6) / values.length)}
-                  x2={(2 + i * ((width - 6) / values.length)) +
-                    ((width - 6) / values.length)}
-                  y1={graphHeight + 35 -
-                    ((graphHeight / maxValue) * v.wind_avg)}
-                  y2={graphHeight + 35 -
-                    ((graphHeight / maxValue) * v.wind_avg)}
+                  x2={2 +
+                    i * ((width - 6) / values.length) +
+                    (width - 6) / values.length}
+                  y1={graphHeight - (graphHeight / maxValue) * v.wind_avg}
+                  y2={graphHeight - (graphHeight / maxValue) * v.wind_avg}
                   stroke="white"
                 />
               </>
@@ -109,8 +103,7 @@ const Graph: React.FC<WindGraphProps> = ({ label, values }) => {
               <>
                 <rect
                   x={2 + i * ((width - 6) / values.length)}
-                  y={graphHeight + 35 -
-                    ((graphHeight / maxValue) * v.wind_lull)}
+                  y={graphHeight - (graphHeight / maxValue) * v.wind_lull}
                   width={(width - 6) / values.length}
                   height={(graphHeight / maxValue) * v.wind_lull}
                   fill={`hsla(${hueForSpeed(v.wind_lull)}, 100%, 50%, 0.5)`}
@@ -118,12 +111,11 @@ const Graph: React.FC<WindGraphProps> = ({ label, values }) => {
                 />
                 <line
                   x1={2 + i * ((width - 6) / values.length)}
-                  x2={(2 + i * ((width - 6) / values.length)) +
-                    ((width - 6) / values.length)}
-                  y1={graphHeight + 35 -
-                    ((graphHeight / maxValue) * v.wind_lull)}
-                  y2={graphHeight + 35 -
-                    ((graphHeight / maxValue) * v.wind_lull)}
+                  x2={2 +
+                    i * ((width - 6) / values.length) +
+                    (width - 6) / values.length}
+                  y1={graphHeight - (graphHeight / maxValue) * v.wind_lull}
+                  y2={graphHeight - (graphHeight / maxValue) * v.wind_lull}
                   stroke="white"
                 />
               </>
@@ -133,62 +125,56 @@ const Graph: React.FC<WindGraphProps> = ({ label, values }) => {
       </g>
       <g id="y-axis-legend">
         {[...Array.from(Array(25))].map((_, n) => {
-          const y = (n + 1);
+          const y = n + 1;
           if (
             y < maxValue &&
             (maxValue === 6 ? true : y % Math.round(maxValue / 5) === 0)
           ) {
-            return (<text
-              key={n}
-              x={2}
-              y={graphHeight + 35 - (graphHeight / maxValue) * y}
-              // stroke={`hsla(210, 50%, 0%, 0.9)`}
-              // fill={`hsl(${hueForSpeed(y)}, 100%, 50%)`}
-              // stroke="black"
-              // strokeWidth="0.5"
-              fill="white"
-              fontSize={`0.5em`}
-              fontWeight="bold"
-              dominantBaseline="middle"
-            >
-              {y}mph
-            </text>);
+            return (
+              <text
+                key={n}
+                x={2}
+                y={graphHeight - (graphHeight / maxValue) * y}
+                fill="white"
+                fontWeight="bold"
+                dominantBaseline="middle"
+              >
+                {y}mph
+              </text>
+            );
           }
         })}
       </g>
       <g id="x-axis-legend">
         {values.map((_, i) => {
-          const x = (2 + (((width - 6) / values.length) / 2) +
-            i * ((width - 6) / values.length));
-          return i % 10 === 0 && i !== 0 && (
-            <g className="x-axis-mark" key={i}>
-              <line
-                x1={2 + (((width - 6) / values.length) / 2) +
-                  i * ((width - 6) / values.length)}
-                y1={graphHeight + 36}
-                x2={2 + (((width - 6) / values.length) / 2) +
-                  i * ((width - 6) / values.length)}
-                y2={graphHeight + 45}
-                stroke="white"
-              />
-              <text
-                x={x}
-                y={graphHeight + 52}
-                fill="white"
-                textAnchor="middle"
-                fontSize={`0.5em`}
-              >
-                {values.length - i}min
-              </text>
-              {/* <text
-                x={width / 2}
-                y={height - 16}
-                fill="white"
-                textAnchor="middle"
-              >
-                Minutes Ago
-              </text> */}
-            </g>
+          const x = 2 +
+            (width - 6) / values.length / 2 +
+            i * ((width - 6) / values.length);
+          return (
+            i % 10 === 0 &&
+            i !== 0 && (
+              <g className="x-axis-mark" key={i}>
+                <line
+                  x1={2 +
+                    (width - 6) / values.length / 2 +
+                    i * ((width - 6) / values.length)}
+                  y1={graphHeight}
+                  x2={2 +
+                    (width - 6) / values.length / 2 +
+                    i * ((width - 6) / values.length)}
+                  y2={graphHeight + 5}
+                  stroke="white"
+                />
+                <text
+                  x={x}
+                  y={graphHeight + 16}
+                  fill="white"
+                  textAnchor="middle"
+                >
+                  {values.length - i}min
+                </text>
+              </g>
+            )
           );
         })}
       </g>
