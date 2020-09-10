@@ -9,3 +9,4 @@ export {
 export { v4 } from "https://deno.land/std@0.66.0/uuid/mod.ts";
 export * as flags from "https://deno.land/std@0.66.0/flags/mod.ts";
 export * as path from "https://deno.land/std@0.66.0/path/mod.ts";
+export { Client } from "https://raw.githubusercontent.com/deno-postgres/deno-postgres/master/mod.ts";

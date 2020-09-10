@@ -6,7 +6,7 @@ const ENV = config();
 // sql experiment
 // import { Client } from "https://deno.land/x/postgres@v0.4.3/mod.ts";
 // import { Client } from "../../deno-postgres/mod.ts";
-import { Client } from "https://raw.githubusercontent.com/deno-postgres/deno-postgres/master/mod.ts";
+import { Client } from "./deps.ts";
 
 const client = new Client(
   ENV.DEVELOPMENT
