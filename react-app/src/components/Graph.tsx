@@ -1,4 +1,4 @@
-import React, { memo, useState } from "react";
+import React, { memo, useState, useEffect } from "react";
 import "./Graph.css";
 
 const hueForSpeed = (mph: number) => {
@@ -22,12 +22,17 @@ interface WindGraphProps {
   }>;
 }
 
-const Graph: React.FC<WindGraphProps> = function ({ label, values }) {
+const Graph: React.FC<WindGraphProps> = function ({ values }) {
   const width = window.innerHeight * 0.75;
   const height = window.innerHeight * 0.25;
   const graphHeight = height - 21;
   let maxValue = Math.max(...values.map((v) => v.wind_gust)) || 16;
   maxValue = maxValue < 6 ? 6 : maxValue;
+
+  useEffect(() => {
+    console.log("effect");
+  }, [values]);
+
   return (
     <svg
       id="Graph"
@@ -146,6 +151,12 @@ const Graph: React.FC<WindGraphProps> = function ({ label, values }) {
         })}
       </g>
       <g id="x-axis-legend">
+        <line
+          y1={graphHeight}
+          x2={width}
+          y2={graphHeight}
+          stroke="hsl(210, 50%, 50%)"
+        />
         {values.map((_, i) => {
           const x = 2 +
             (width - 6) / values.length / 2 +

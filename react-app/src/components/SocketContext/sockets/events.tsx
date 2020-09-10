@@ -46,7 +46,6 @@ export const socketEvents = ({ setValue }: SetSocketStateProps) => {
           );
           break;
         case "rapid_wind":
-          // console.log(message.rapid_wind);
           setValue((state) => ({
             ...state,
             rapid_wind: message.rapid_wind.map((e: any) => decodeRapidWind(e)),
@@ -60,6 +59,9 @@ export const socketEvents = ({ setValue }: SetSocketStateProps) => {
           break;
         case "summary":
           setValue((state) => ({ ...state, summary: message.summary }));
+          break;
+        default:
+          break;
       }
     };
   };
