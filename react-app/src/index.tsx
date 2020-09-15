@@ -7,5 +7,5 @@ ReactDOM.render(
   <SocketProvider>
     <App />
   </SocketProvider>,
-  document.getElementById("app"),
+  document.getElementById("root"),
 );

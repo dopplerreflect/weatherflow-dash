@@ -5,6 +5,7 @@
   "license": "MIT",
   "scripts": {
     "start": "parcel index.html --open",
+    "prebuild": "rimraf dist",
     "build": "parcel build index.html"
   },
   "devDependencies": {
@@ -13,6 +14,7 @@
     "@types/react": "^16.9.49",
     "less": "^3.12.2",
     "parcel-bundler": "^1.12.4",
+    "rimraf": "^3.0.2",
     "tsc": "^1.20150623.0",
     "typescript": "^4.0.2"
   },
