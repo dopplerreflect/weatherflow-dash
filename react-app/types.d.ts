@@ -55,3 +55,37 @@ type SocketState = {
 type SetSocketStateProps = {
   setValue: React.Dispatch<React.SetStateAction<SocketState>>;
 };
+
+type RAPWindsAloftProps = {
+  lat: number;
+  lng: number;
+  elev?: number;
+};
+
+type Sounding = {
+  linType: number;
+  pressure: number;
+  height: {
+    meters: number;
+    feet: number;
+  };
+  temp: {
+    c: number;
+    f: number;
+  };
+  dewPt: {
+    c: number;
+    f: number;
+  };
+  windDir: number;
+  windSpd: {
+    kts: number;
+    mph: number;
+  };
+};
+
+type RAPWindsAloftData = {
+  latitude: number;
+  longitude: number;
+  soundings: Sounding[];
+};
