@@ -43,19 +43,19 @@
       }
 
       .t {
-        fill: hsl(var(--hue), 50%, 33%);
-        stroke: hsl(var(--hue), 50%, 50%);
+        fill: hsl(var(--hue), 100%, 75%);
+        stroke: hsl(var(--hue), 100%, 75%);
       }
 
       .h {
-        fill: hsl(var(--hue), 50%, 33%);
-        stroke: hsl(var(--hue), 50%, 50%);
+        fill: hsl(calc(var(--hue) - 180), 100%, 50%);
+        stroke: hsl(colc(var(--hue) - 180), 100%, 90%);
         transform-origin: center;
       }
 
       #d {
-        fill: hsla(90, 100%, 50%, 0.5);
-        stroke: hsl(90, 100%, 50%);
+        fill: hsla(calc(var(--hue) - 0), 100%, 75%, 1);
+        stroke: hsl(calc(var(--hue) - 0), 100%, 75%);
         font-size: 88px;
         font-family: monospace;
         font-weight: bold;
