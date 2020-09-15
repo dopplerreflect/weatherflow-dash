@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import Stat from "./components/Stat";
 import Windchart from "./components/Windchart";
 import Graph from "./components/Graph";
+import RapWindsAloft from "./components/RapWindsAloft";
 import SocketContext from "./components/SocketContext/context";
 import Clock from "./components/clock.svg";
 import "./App.less";
@@ -51,7 +52,7 @@ const App = () => {
           }))}
         />
       </div>
-      <div id="rest">rest</div>
+      <div id="rest"><RapWindsAloft lat={33.97} lng={-84.98} elev={330} /></div>
     </div>
   );
 };
