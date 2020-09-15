@@ -1,10 +1,9 @@
 import {
   config,
   v4,
-  WebSocket,
   isWebSocketCloseEvent,
 } from "./deps.ts";
-import { WfData, WfMessageObj } from "./types.d.ts";
+import type { WfData, WfMessageObj } from "./types.d.ts";
 import { setCache, getCache } from "./database.ts";
 const ENV = config();
 
@@ -33,7 +32,6 @@ if (!data.summary) {
 }
 
 const sendMessage = (message: any) => {
-  // console.log(message);
   clientsMap.forEach((client) => {
     if (client.ws._isClosed) {
       clientsMap.delete(client.clientId);
@@ -46,19 +44,20 @@ const sendMessage = (message: any) => {
     }
   });
 };
+
 const wsClient: WebSocket = new WebSocket(endpoint);
 
-wsClient.on("open", function () {
+wsClient.addEventListener("open", function () {
   console.log("wsClient connected!");
   sendStartRequests();
 });
 
-wsClient.on("close", (event: any) => {
+wsClient.addEventListener("close", (event: any) => {
   console.log("close", event);
 });
 
-wsClient.on("message", async function (message: string) {
-  const messageObj: WfMessageObj = JSON.parse(message);
+wsClient.addEventListener("message", async function (message) {
+  const messageObj: WfMessageObj = JSON.parse(message.data);
   let cacheRes;
   console.log(
     messageObj.type,

@@ -41,11 +41,12 @@ listenAndServe({ port }, async (req) => {
       break;
     case "/ws":
       if (acceptable(req)) {
+        const { conn, r: bufReader, w: bufWriter, headers } = req;
         acceptWebSocket({
-          conn: req.conn,
-          bufReader: req.r,
-          bufWriter: req.w,
-          headers: req.headers,
+          conn,
+          bufReader,
+          bufWriter,
+          headers,
         }).then(handleWs);
       }
       break;
