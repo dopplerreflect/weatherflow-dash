@@ -115,7 +115,7 @@ const Windchart: React.FC<Props> = ({ rapid_wind }) => {
           <path
             className="direction-indicator"
             id="directionIndicator"
-            d="M 258 35 L 260 256 L 314 314 L 256 480 L 197 314 L 252 256 L 254 35 Z"
+            d="M 258 2 L 260 256 L 314 314 L 256 510 L 197 314 L 252 256 L 254 2 Z"
             style={{ transform: `rotate(${latestDir}deg)` }}
           />
 
