@@ -6,5 +6,8 @@
 	{
 		"path": "react-app"
 	}
-]
+],
+"settings": {
+	"svg.preview.background": "black"
+}
 }
