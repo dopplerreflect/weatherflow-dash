@@ -52,7 +52,7 @@ const App = () => {
           }))}
         />
       </div>
-      <div id="rest"><RapWindsAloft lat={33.97} lng={-84.98} elev={330} /></div>
+      <div id="rest"><RapWindsAloft lat={33.97} lng={-85.17} elev={261} /></div>
     </div>
   );
 };
