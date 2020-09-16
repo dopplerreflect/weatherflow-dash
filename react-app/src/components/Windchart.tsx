@@ -1,12 +1,7 @@
 import React from "react";
 import "./Windchart.css";
+import { hueForSpeed } from "../utils/hueForSpeed";
 
-const hueForSpeed = (mph: number) => {
-  if (mph >= 25) {
-    return -82.5;
-  }
-  return 230 - Number(mph) * 12.5;
-};
 interface Props {
   rapid_wind: DecodedRapidWind[];
 }
