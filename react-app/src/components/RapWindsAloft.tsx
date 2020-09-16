@@ -27,10 +27,12 @@ const RapWindsAloft: React.FC<RAPWindsAloftProps> = (
     return () => clearInterval(interval);
   }, [latitude, longitude, elevation]);
 
+  const { type, hour, month, day, year } = data;
+
   return (
     <div id="RAPWindsAloft">
       <div className="sounding header">
-        <div className="center">Altitude</div>
+        <div className="center">Altitude AGL</div>
         <div className="center">Speed</div>
         <div className="center">Direction</div>
         <div className="center">Temperature</div>
@@ -45,28 +47,35 @@ const RapWindsAloft: React.FC<RAPWindsAloftProps> = (
           <div className="center">{sounding.temp.f}°F</div>
         </div>
       ))}
-      <div style={{ textAlign: "right" }}>
-        {JSON.stringify({ latitude, longitude, elevation })}
+      <div
+        style={{
+          textAlign: "right",
+          fontFamily: "monospace",
+          overflowX: "scroll",
+        }}
+      >
+        {JSON.stringify(
+          { hourUTC: hour, latitude, longitude, elevation },
+        )}
       </div>
     </div>
   );
 };
 
 const Arrow: React.FC<{ dir: number }> = ({ dir }) => (
-  <svg viewBox="0 0 100 100">
+  <svg viewBox="0 0 200 100">
     <path
       d="M 50 100 L 0 25 L 25 30 V 0 H 75 V 30 L 100 25 Z"
       fill="hsl(30, 100%, 50%)"
       transform={`rotate(${dir}, 50, 50)`}
     />
     <text
-      x={50}
+      x={150}
       y={55}
       dominantBaseline="middle"
       textAnchor="middle"
-      fill="hsl(210, 100%, 10%)"
+      fill="hsl(210, 100%, 75%)"
       fontSize={36}
-      fontWeight="bold"
     >
       {dir}°
     </text>

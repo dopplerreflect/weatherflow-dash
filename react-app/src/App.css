@@ -69,7 +69,7 @@ body {
   grid-template-rows: var(--row-height) var(--row-height) var(--row-height) var(--row-height);
   grid-template-areas: 'clock     anemometer rest' 'temp      anemometer rest' 'humidity  anemometer rest' 'feelslike windgraph  rest';
 }
-@media (max-aspect-ratio: 4/3) {
+@media (max-aspect-ratio: 14/9) {
   #App {
     --column-width: calc((100vw / 4) - 5px);
     grid-template-columns: var(--column-width) var(--column-width) var(--column-width) var(--column-width);

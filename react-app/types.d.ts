@@ -85,6 +85,11 @@ type Sounding = {
 };
 
 type RAPWindsAloftData = {
+  type: string;
+  hour: number;
+  month: string;
+  day: number;
+  year: number;
   latitude: number;
   longitude: number;
   soundings: Sounding[];
