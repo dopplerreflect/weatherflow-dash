@@ -5,9 +5,11 @@ import {
   acceptable,
   flags,
   path,
+  config,
 } from "./deps.ts";
 import { handleWs } from "./websocket.ts";
 
+const ENV = config();
 const script = import.meta.url.replace(/^file:\/\//, "");
 const { args } = Deno;
 const DEFAULT_PORT = 3001;
@@ -37,6 +39,16 @@ listenAndServe({ port }, async (req) => {
         path.join(path.dirname(script), "..", "react-app", "favicon.svg"),
       );
       headers.set("content-type", "image/svg+xml");
+      req.respond({ body, headers });
+      break;
+    case "/deployment-lat-lng-elev":
+      headers.set("content-type", "application/json");
+      headers.set("access-control-allow-origin", "http://localhost:1234");
+      const bodyJSON = Deno.env.get("WINDS_ALOFT_QUERY_DATA") ||
+        ENV.WINDS_ALOFT_QUERY_DATA ||
+        JSON.stringify({ latitude: null, longitude: null, elevation: null });
+      console.log(bodyJSON);
+      body = JSON.parse(bodyJSON);
       req.respond({ body, headers });
       break;
     case "/ws":

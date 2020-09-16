@@ -57,9 +57,9 @@ type SetSocketStateProps = {
 };
 
 type RAPWindsAloftProps = {
-  lat: number;
-  lng: number;
-  elev?: number;
+  latitude: number;
+  longitude: number;
+  elevation: number;
 };
 
 type Sounding = {
