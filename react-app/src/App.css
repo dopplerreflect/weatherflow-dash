@@ -71,8 +71,9 @@ body {
 }
 @media (max-aspect-ratio: 4/3) {
   #App {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: auto;
+    --column-width: calc((100vw / 4) - 5px);
+    grid-template-columns: var(--column-width) var(--column-width) var(--column-width) var(--column-width);
+    grid-template-rows: calc(100vw / 4) auto;
     grid-template-areas: 'clock temp humidity feelslike' 'anemometer anemometer anemometer anemometer' 'windgraph windgraph windgraph windgraph' 'rest rest rest rest';
   }
 }

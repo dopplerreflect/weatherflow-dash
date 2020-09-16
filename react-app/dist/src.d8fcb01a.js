@@ -43,4 +43,4 @@ module.exports="/clock.787f3dd5.svg";
 },{"react":"HdMw","./components/Stat":"NWFx","./components/Windchart":"KERZ","./components/Graph":"tNjH","./components/RapWindsAloft":"I04g","./components/SocketContext/context":"JX3V","./components/clock.svg":"rfWP","./App.css":"rF8y"}],"OGgv":[function(require,module,exports) {
 "use strict";var e=this&&this.__importDefault||function(e){return e&&e.__esModule?e:{default:e}};Object.defineProperty(exports,"__esModule",{value:!0});var t=e(require("react")),r=e(require("react-dom")),u=e(require("./components/SocketContext")),l=e(require("./App"));r.default.render(t.default.createElement(u.default,null,t.default.createElement(l.default,null)),document.getElementById("root"));
 },{"react":"HdMw","react-dom":"X9zx","./components/SocketContext":"SGqF","./App":"Ru8j"}]},{},["OGgv"], null)
-//# sourceMappingURL=/src.50cd915e.js.map
+//# sourceMappingURL=/src.d8fcb01a.js.map
