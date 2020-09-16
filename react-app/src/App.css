@@ -1,0 +1,78 @@
+
+:root {
+  --base-hue: 210;
+}
+::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: transparent;
+}
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: 
+    local('Roboto'), 
+    local('Roboto-Regular'), 
+    url('./public/fonts/roboto-v20-latin-regular.woff2') format('woff2'), 
+}
+@font-face {
+  font-family: 'Roboto Mono';
+  font-style: normal;
+  font-weight: 400;
+  src: local(''), 
+  url('./public/fonts/roboto-mono-v12-latin-regular.woff2') format('woff2'), 
+}
+html,
+body {
+  margin: 0;
+  font-family: 'Roboto', Helvetica, Arial, sans-serif;
+  color: hsl(var(--base-hue), 100%, 75%);
+  background-color: hsl(var(--base-hue), 100%, 10%);
+}
+#App {
+  --row-height: calc((100vh / 4) - 5px);
+  display: grid;
+  width: 100vw;
+  height: 100vh;
+  gap: 5px;
+}
+#App div {
+  background-color: hsl(210, 50%, 5%);
+  border: 1px solid hsl(210, 50%, 30%);
+}
+#App #clock {
+  grid-area: clock;
+}
+#App #temp {
+  grid-area: temp;
+}
+#App #humidity {
+  grid-area: humidity;
+}
+#App #feelslike {
+  grid-area: feelslike;
+}
+#App #anemometer {
+  grid-area: anemometer;
+}
+#App #windgraph {
+  grid-area: windgraph;
+}
+#App #rest {
+  grid-area: rest;
+}
+#App {
+  grid-template-columns: calc(100vh / 4) calc((100vh / 4) * 3) 1fr;
+  grid-template-rows: var(--row-height) var(--row-height) var(--row-height) var(--row-height);
+  grid-template-areas: 'clock     anemometer rest' 'temp      anemometer rest' 'humidity  anemometer rest' 'feelslike windgraph  rest';
+}
+@media (max-aspect-ratio: 4/3) {
+  #App {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: auto;
+    grid-template-areas: 'clock temp humidity feelslike' 'anemometer anemometer anemometer anemometer' 'windgraph windgraph windgraph windgraph' 'rest rest rest rest';
+  }
+}

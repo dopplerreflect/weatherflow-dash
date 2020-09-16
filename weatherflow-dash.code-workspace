@@ -8,6 +8,9 @@
 	}
 ],
 "settings": {
-	"svg.preview.background": "black"
+	"svg.preview.background": "black",
+	"javascript.preferences.quoteStyle": "double",
+	"typescript.preferences.quoteStyle": "double",
+	"autoimport.doubleQuotes": true
 }
 }

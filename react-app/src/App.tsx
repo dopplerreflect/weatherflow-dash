@@ -5,7 +5,7 @@ import Graph from "./components/Graph";
 import RapWindsAloft from "./components/RapWindsAloft";
 import SocketContext from "./components/SocketContext/context";
 import Clock from "./components/clock.svg";
-import "./App.less";
+import "./App.css";
 
 const App = () => {
   const { obs_st, rapid_wind, summary } = useContext(SocketContext);
