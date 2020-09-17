@@ -19,8 +19,9 @@ const port = argPort ? Number(argPort) : DEFAULT_PORT;
 console.log(`Deno server listening on port ${port}`);
 
 listenAndServe({ port }, async (req) => {
-  let body = "";
+  let body;
   let headers = new Headers();
+  console.log({ proto: req.proto });
   switch (req.url) {
     case "/":
       try {
@@ -75,13 +76,14 @@ listenAndServe({ port }, async (req) => {
       const ext = match && match[1];
       if (ext) headers.set("content-type", mimeTypes[ext]);
       try {
-        body = await Deno.readTextFile(
+        body = await Deno.readFile(
           path.join(path.dirname(script), "..", "dist", req.url),
         );
+        console.log(req.url, headers);
+        req.respond({ body, headers });
       } catch (e) {
         console.error(body, e);
+        req.respond({ body, status: 404 });
       }
-      console.log(req.url, headers);
-      req.respond({ body, headers });
   }
 });
