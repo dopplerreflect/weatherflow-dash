@@ -1,5 +1,13 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
-  <circle cx="64" cy="64" r="60" stroke="hsl(210, 100%, 66%)" stroke-width="8" fill="none" />
-  <path d="M 64 120 L 48 74 L 60 64 L 64 8 L 68 64 L 80 74 Z" fill="hsl(30, 100%, 50%)"
-    transform="rotate(55.6335, 64 64)" />
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <circle cx="256" cy="256" r="232" stroke="hsl(210, 100%, 66%)" stroke-width="48" fill="none" />
+  <path d="
+      M 256 464
+      L 316 316
+      L 272 256
+      L 260 48
+      H 252
+      L 240 256
+      L 196 316
+      Z
+    " fill="hsl(30, 100%, 50%)" transform="rotate(55.6335, 256, 256)" />
 </svg>
