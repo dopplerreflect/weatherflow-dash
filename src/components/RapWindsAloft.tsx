@@ -49,9 +49,9 @@ const RapWindsAloft: React.FC<RAPWindsAloftProps> = (
       ))}
       <div
         style={{
-          textAlign: "right",
           fontFamily: "monospace",
-          overflowX: "scroll",
+          display: "flex",
+          justifyContent: "center",
         }}
       >
         {JSON.stringify(
