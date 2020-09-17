@@ -10,4 +10,5 @@ export const mimeTypes: MimeTypesDict = {
   jpeg: "image/jpeg",
   svg: "image/svg+xml",
   map: "application/json",
+  webp: "image/webp",
 };

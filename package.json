@@ -6,7 +6,25 @@
   "scripts": {
     "start": "parcel src/index.html --open",
     "prebuild": "rimraf dist",
-    "build": "parcel build src/index.html"
+    "build": "parcel build src/index.html",
+    "postbuild": "workbox generateSW"
+  },
+  "pwaManifest": {
+    "name": "Weatherflow Dash",
+    "shortName": "WF Dash",
+    "startUrl": "./",
+    "theme": "#060d13",
+    "generateIconOptions": {
+      "baseIcon": "./src/favicon.svg",
+      "sizes": [
+        32,
+        128,
+        192,
+        384,
+        512
+      ],
+      "genFavicons": true
+    }
   },
   "devDependencies": {
     "@babel/preset-env": "^7.11.5",
@@ -15,9 +33,11 @@
     "@types/react-dom": "^16.9.8",
     "less": "^3.12.2",
     "parcel-bundler": "^1.12.4",
+    "parcel-plugin-pwa-manifest": "^3.0.10",
     "rimraf": "^3.0.2",
     "tsc": "^1.20150623.0",
-    "typescript": "^4.0.2"
+    "typescript": "^4.0.2",
+    "workbox-cli": "^5.1.4"
   },
   "dependencies": {
     "react": "^16.13.1",

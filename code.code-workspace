@@ -1,10 +1,13 @@
 {
   "folders": [
-	{
-		"path": "deno-server"
-	},
-	{
-		"path": "src"
-	}
-]
+    {
+      "path": "deno-server"
+    },
+    {
+      "path": "src"
+    },
+    {
+      "path": "dist"
+    }
+  ]
 }

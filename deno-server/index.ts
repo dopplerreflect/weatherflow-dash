@@ -81,6 +81,7 @@ listenAndServe({ port }, async (req) => {
       } catch (e) {
         console.error(body, e);
       }
+      console.log(req.url, headers);
       req.respond({ body, headers });
   }
 });
