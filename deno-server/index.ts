@@ -8,6 +8,7 @@ import {
   config,
 } from "./deps.ts";
 import { handleWs } from "./websocket.ts";
+import { Status } from "https://deno.land/std@0.69.0/http/http_status.ts";
 
 const ENV = config();
 const script = import.meta.url.replace(/^file:\/\//, "");
@@ -23,22 +24,30 @@ listenAndServe({ port }, async (req) => {
   let headers = new Headers();
   switch (req.url) {
     case "/":
-      body = await Deno.readTextFile(
-        path.join(
-          path.dirname(script),
-          "..",
-          "dist",
-          "index.html",
-        ),
-      );
-      req.respond({ body });
+      try {
+        body = await Deno.readTextFile(
+          path.join(
+            path.dirname(script),
+            "..",
+            "dist",
+            "index.html",
+          ),
+        );
+        req.respond({ body });
+      } catch (e) {
+        req.respond({ status: 404, body: "not found. was project built?" });
+      }
       break;
     case "/favicon.ico":
-      body = await Deno.readTextFile(
-        path.join(path.dirname(script), "..", "src", "favicon.svg"),
-      );
-      headers.set("content-type", "image/svg+xml");
-      req.respond({ body, headers });
+      try {
+        body = await Deno.readTextFile(
+          path.join(path.dirname(script), "..", "src", "favicon.svg"),
+        );
+        headers.set("content-type", "image/svg+xml");
+        req.respond({ body, headers });
+      } catch (e) {
+        req.respond({ status: 404 });
+      }
       break;
     case "/deployment-lat-lng-elev":
       headers.set("content-type", "application/json");
