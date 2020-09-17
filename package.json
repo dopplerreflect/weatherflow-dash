@@ -16,13 +16,6 @@
     "theme": "#060d13",
     "generateIconOptions": {
       "baseIcon": "./src/favicon.svg",
-      "sizes": [
-        32,
-        128,
-        192,
-        384,
-        512
-      ],
       "purpose": ["any", "maskable"],
       "genFavicons": true
     }
