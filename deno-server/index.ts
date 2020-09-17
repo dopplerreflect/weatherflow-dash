@@ -8,7 +8,6 @@ import {
   config,
 } from "./deps.ts";
 import { handleWs } from "./websocket.ts";
-import { Status } from "https://deno.land/std@0.69.0/http/http_status.ts";
 
 const ENV = config();
 const script = import.meta.url.replace(/^file:\/\//, "");
