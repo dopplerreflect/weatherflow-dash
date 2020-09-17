@@ -23,6 +23,7 @@
         384,
         512
       ],
+      "purpose": ["any", "maskable"],
       "genFavicons": true
     }
   },
