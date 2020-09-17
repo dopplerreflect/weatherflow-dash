@@ -27,7 +27,6 @@ listenAndServe({ port }, async (req) => {
         path.join(
           path.dirname(script),
           "..",
-          "react-app",
           "dist",
           "index.html",
         ),
@@ -36,7 +35,7 @@ listenAndServe({ port }, async (req) => {
       break;
     case "/favicon.ico":
       body = await Deno.readTextFile(
-        path.join(path.dirname(script), "..", "react-app", "favicon.svg"),
+        path.join(path.dirname(script), "..", "src", "favicon.svg"),
       );
       headers.set("content-type", "image/svg+xml");
       req.respond({ body, headers });
@@ -69,7 +68,7 @@ listenAndServe({ port }, async (req) => {
       if (ext) headers.set("content-type", mimeTypes[ext]);
       try {
         body = await Deno.readTextFile(
-          path.join(path.dirname(script), "..", "react-app", "dist", req.url),
+          path.join(path.dirname(script), "..", "dist", req.url),
         );
       } catch (e) {
         console.error(body, e);
