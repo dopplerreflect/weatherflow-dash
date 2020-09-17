@@ -1,5 +1,5 @@
 import React, { memo, useState, useEffect } from "react";
-import { hueForSpeed } from "../utils/hueForSpeed";
+import { hueForSpeed, opacityForAge } from "../utils";
 import "./Graph.css";
 
 interface WindGraphProps {
@@ -61,6 +61,7 @@ const Graph: React.FC<WindGraphProps> = function ({ values }) {
                   height={(graphHeight / maxValue) * v.wind_gust}
                   fill={`hsla(${hueForSpeed(v.wind_gust)}, 100%, 50%, 0.5)`}
                   stroke={`hsla(${hueForSpeed(v.wind_gust)}, 100%, 50%, 1)`}
+                  opacity={opacityForAge(values.length, i)}
                 />
                 <line
                   x1={2 + i * ((width - 6) / values.length)}
@@ -70,6 +71,7 @@ const Graph: React.FC<WindGraphProps> = function ({ values }) {
                   y1={graphHeight - (graphHeight / maxValue) * v.wind_gust}
                   y2={graphHeight - (graphHeight / maxValue) * v.wind_gust}
                   stroke="white"
+                  opacity={opacityForAge(values.length, i)}
                 />
               </>
             )}
@@ -82,6 +84,7 @@ const Graph: React.FC<WindGraphProps> = function ({ values }) {
                   height={(graphHeight / maxValue) * v.wind_avg}
                   fill={`hsla(${hueForSpeed(v.wind_avg)}, 100%, 50%, 0.5)`}
                   stroke={`hsla(${hueForSpeed(v.wind_avg)}, 100%, 50%, 1)`}
+                  opacity={opacityForAge(values.length, i)}
                 />
                 <line
                   x1={2 + i * ((width - 6) / values.length)}
@@ -91,6 +94,7 @@ const Graph: React.FC<WindGraphProps> = function ({ values }) {
                   y1={graphHeight - (graphHeight / maxValue) * v.wind_avg}
                   y2={graphHeight - (graphHeight / maxValue) * v.wind_avg}
                   stroke="white"
+                  opacity={opacityForAge(values.length, i)}
                 />
               </>
             )}
@@ -103,6 +107,7 @@ const Graph: React.FC<WindGraphProps> = function ({ values }) {
                   height={(graphHeight / maxValue) * v.wind_lull}
                   fill={`hsla(${hueForSpeed(v.wind_lull)}, 100%, 50%, 0.5)`}
                   stroke={`hsla(${hueForSpeed(v.wind_lull)}, 100%, 50%, 1)`}
+                  opacity={opacityForAge(values.length, i)}
                 />
                 <line
                   x1={2 + i * ((width - 6) / values.length)}
@@ -112,6 +117,7 @@ const Graph: React.FC<WindGraphProps> = function ({ values }) {
                   y1={graphHeight - (graphHeight / maxValue) * v.wind_lull}
                   y2={graphHeight - (graphHeight / maxValue) * v.wind_lull}
                   stroke="white"
+                  opacity={opacityForAge(values.length, i)}
                 />
               </>
             )}

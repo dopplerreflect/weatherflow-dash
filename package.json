@@ -15,7 +15,7 @@
     "startUrl": "./",
     "theme": "#060d13",
     "generateIconOptions": {
-      "baseIcon": "./src/favicon.svg",
+      "baseIcon": "./src/public/favicon.svg",
       "purpose": ["any", "maskable"],
       "genFavicons": true
     }

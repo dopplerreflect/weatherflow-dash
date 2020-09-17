@@ -1,8 +1,5 @@
 import { joinChannel } from "./emit";
-import {
-  decodeRapidWind,
-  decodeObsSt,
-} from "../../../utils/decodeWeatherflowObjects";
+import { decodeRapidWind, decodeObsSt } from "../../../utils";
 
 const SOCKET_SERVER = `${
   document.location.protocol === "https:" ? "wss" : "ws"
