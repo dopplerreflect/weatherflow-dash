@@ -1,4 +1,4 @@
-import React, { memo, useState, useEffect } from 'react';
+import React, { memo } from 'react';
 import { hueForSpeed, opacityForAge } from '../utils';
 import './Graph.css';
 
@@ -20,10 +20,6 @@ const Graph: React.FC<WindGraphProps> = function ({ obs_st }) {
   const graphHeight = height - 21;
   let maxValue = Math.max(...values.map(v => v.wind_gust)) || 16;
   maxValue = maxValue < 6 ? 6 : maxValue;
-
-  useEffect(() => {
-    console.log('effect');
-  }, [values]);
 
   return (
     <svg
