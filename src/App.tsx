@@ -1,11 +1,11 @@
-import React, { useContext, useEffect, useState } from "react";
-import Stat from "./components/Stat";
-import Windchart from "./components/Windchart";
-import Graph from "./components/Graph";
-import RapWindsAloft from "./components/RapWindsAloft";
-import SocketContext from "./components/SocketContext/context";
-import Clock from "./components/clock.svg";
-import "./App.css";
+import React, { useContext, useEffect, useState } from 'react';
+import Stat from './components/Stat';
+import Windchart from './components/Windchart';
+import Graph from './components/Graph';
+import RapWindsAloft from './components/RapWindsAloft';
+import SocketContext from './components/SocketContext/context';
+import Clock from './components/clock.svg';
+import './App.css';
 
 type RapCoords = {
   latitude: number;
@@ -18,23 +18,23 @@ const App = () => {
   const latest_obs_st = obs_st[obs_st.length - 1];
   const [{ latitude, longitude, elevation }, setRapCoords]: [
     Partial<RapCoords>,
-    any,
+    any
   ] = useState({});
 
   const fetchRapWindsAloftCoords = async () => {
-    const URL = document.location.hostname === "localhost"
-      ? "http://localhost:3001/deployment-lat-lng-elev"
-      : `${document.location.protocol}//${document.location.host}/deployment-lat-lng-elev`;
+    const URL =
+      document.location.hostname === 'localhost'
+        ? 'http://localhost:3001/deployment-lat-lng-elev'
+        : `${document.location.protocol}//${document.location.host}/deployment-lat-lng-elev`;
     const response = await fetch(URL);
     const json = await response.json();
     try {
-      console.log(json);
       const rapCoords = json;
       setRapCoords(rapCoords);
     } catch (e) {
       console.error(
-        "Got invalid winds aloft coords",
-        'Set an environment variable on the server. Example: WINDS_ALOFT_QUERY_DATA={"latitude":33.97,"longitude":-85.17,"elevation":261}',
+        'Got invalid winds aloft coords',
+        'Set an environment variable on the server. Example: WINDS_ALOFT_QUERY_DATA={"latitude":33.97,"longitude":-85.17,"elevation":261}'
       );
     }
   };
@@ -71,19 +71,11 @@ const App = () => {
       </div>
       <div id="anemometer">
         <Windchart
-          rapid_wind={rapid_wind.map((e) => ({ ...e, mps: e.mps * 2.237 }))}
+          rapid_wind={rapid_wind.map(e => ({ ...e, mps: e.mps * 2.237 }))}
         />
       </div>
       <div id="windgraph">
-        <Graph
-          label="Winds"
-          values={obs_st.map((e) => ({
-            time: e.time,
-            wind_lull: e.wind_lull * 2.237,
-            wind_avg: e.wind_avg * 2.237,
-            wind_gust: e.wind_gust * 2.237,
-          }))}
-        />
+        <Graph label="Winds" obs_st={obs_st} />
       </div>
       <div id="rest">
         {latitude && longitude && elevation && (
