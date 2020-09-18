@@ -1,18 +1,20 @@
-import React, { memo, useEffect, useState } from "react";
-import "./RapWindsAloft.less";
+import React, { memo, useEffect, useState } from 'react';
+import './RapWindsAloft.less';
 
-const RapWindsAloft: React.FC<RAPWindsAloftProps> = (
-  { latitude, longitude, elevation },
-) => {
+const RapWindsAloft: React.FC<RAPWindsAloftProps> = ({
+  latitude,
+  longitude,
+  elevation,
+}) => {
   const [data, setData]: [Partial<RAPWindsAloftData>, any] = useState({});
 
   const fetchWindsAloft = async (
     latitude: number,
     longitude: number,
-    elevation: number,
+    elevation: number
   ) => {
     const result = await fetch(
-      `https://deno-winds-aloft-json.herokuapp.com/${latitude}/${longitude}/${elevation}`,
+      `https://deno-winds-aloft-json.herokuapp.com/${latitude}/${longitude}/${elevation}`
     );
     const data = await result.json();
     setData(data);
@@ -21,7 +23,7 @@ const RapWindsAloft: React.FC<RAPWindsAloftProps> = (
   useEffect(() => {
     fetchWindsAloft(latitude, longitude, elevation);
     const interval = setInterval(() => {
-      console.log("fetching wa on interval");
+      console.log('fetching wa on interval');
       fetchWindsAloft(latitude, longitude, elevation);
     }, 1000 * 60 * 10);
     return () => clearInterval(interval);
@@ -42,28 +44,27 @@ const RapWindsAloft: React.FC<RAPWindsAloftProps> = (
           <div className="center">{sounding.height.feet} ft.</div>
           <div className="center">{sounding.windSpd.mph} mph</div>
           <div className="center">
-            <Arrow dir={sounding.windDir} />
+            <Arrow dir={sounding.windDir} />{' '}
+            <div className="text">{sounding.windDir}°</div>
           </div>
           <div className="center">{sounding.temp.f}°F</div>
         </div>
       ))}
       <div
         style={{
-          fontFamily: "monospace",
-          display: "flex",
-          justifyContent: "center",
+          fontFamily: 'monospace',
+          display: 'flex',
+          justifyContent: 'center',
         }}
       >
-        {JSON.stringify(
-          { hourUTC: hour, latitude, longitude, elevation },
-        )}
+        {JSON.stringify({ hourUTC: hour, latitude, longitude, elevation })}
       </div>
     </div>
   );
 };
 
 const Arrow: React.FC<{ dir: number }> = ({ dir }) => (
-  <svg viewBox="0 0 64 32">
+  <svg viewBox="0 0 32 32">
     <circle
       cx="16"
       cy="16"
