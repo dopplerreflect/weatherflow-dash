@@ -63,19 +63,26 @@ const RapWindsAloft: React.FC<RAPWindsAloftProps> = (
 };
 
 const Arrow: React.FC<{ dir: number }> = ({ dir }) => (
-  <svg viewBox="0 0 200 100">
+  <svg viewBox="0 0 64 32">
+    <circle
+      cx="16"
+      cy="16"
+      r="15.5"
+      stroke="hsl(210, 100%, 75%)"
+      fill="hsl(210, 100%, 25%)"
+    />
     <path
-      d="M 50 100 L 0 25 L 25 30 V 0 H 75 V 30 L 100 25 Z"
+      d="M 16 31 L 11.686 20.313 L 15 16 L 15.75 1 H 16.25 L 17 16 L 20.314 20.313 Z"
       fill="hsl(30, 100%, 50%)"
-      transform={`rotate(${dir}, 50, 50)`}
+      transform={`rotate(${dir}, 16, 16)`}
     />
     <text
-      x={150}
-      y={55}
+      x="48"
+      y="18"
       dominantBaseline="middle"
       textAnchor="middle"
       fill="hsl(210, 100%, 75%)"
-      fontSize={36}
+      fontSize="0.6875em"
     >
       {dir}°
     </text>
