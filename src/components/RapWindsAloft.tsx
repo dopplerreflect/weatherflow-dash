@@ -34,19 +34,14 @@ const RapWindsAloft: React.FC<RAPWindsAloftProps> = ({
   return (
     <div id="RAPWindsAloft">
       <div className="sounding header">
-        <div className="center">Altitude AGL</div>
-        <div className="center">Speed</div>
-        <div className="center">Direction</div>
-        <div className="center">Temperature</div>
+        <div className="center">Winds Aloft</div>
       </div>
       {data.soundings?.reverse().map((sounding, i) => (
         <div className="sounding" key={i}>
           <div className="center">{sounding.height.feet} ft.</div>
           <div className="center">{sounding.windSpd.mph} mph</div>
-          <div className="center">
-            <Arrow dir={sounding.windDir} />{' '}
-            <div className="text">{sounding.windDir}°</div>
-          </div>
+          <Arrow dir={sounding.windDir} />
+          <div className="center">{sounding.windDir}°</div>
           <div className="center">{sounding.temp.f}°F</div>
         </div>
       ))}
@@ -64,7 +59,7 @@ const RapWindsAloft: React.FC<RAPWindsAloftProps> = ({
 };
 
 const Arrow: React.FC<{ dir: number }> = ({ dir }) => (
-  <svg viewBox="0 0 32 32">
+  <svg viewBox="0 0 32 32" height="2em" width="2em">
     <circle
       cx="16"
       cy="16"
