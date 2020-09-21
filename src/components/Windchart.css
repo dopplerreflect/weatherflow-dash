@@ -9,7 +9,7 @@ svg#Windchart .hashmark {
   fill: hsl(var(--base-hue), 100%, 75%);
 }
 svg#Windchart .text {
-  fill: hsl(var(--base-hue), 100%, 75%);
+  fill: hsl(var(--base-hue), 100%, 25%);
   font-weight: bold;
   font-size: 2rem;
 }
@@ -27,12 +27,12 @@ svg#Windchart .velocity-legend {
   text-anchor: middle;
 }
 svg#Windchart .line {
-  stroke: hsl(var(--base-hue), 100%, 75%);
+  stroke: hsl(var(--base-hue), 100%, 25%);
   stroke-width: 1px;
 }
 svg#Windchart .ring {
   fill: none;
-  stroke: hsl(var(--base-hue), 100%, 75%);
+  stroke: hsl(var(--base-hue), 100%, 25%);
   stroke-width: 1;
 }
 svg#Windchart .direction-indicator {
