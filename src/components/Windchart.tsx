@@ -139,11 +139,11 @@ const Windchart: React.FC<Props> = ({ rapid_wind }) => {
       <circle className="ring" cx={256} cy={256} r={254} />
 
       <g id="speed-legend">
-        {[0, 5, 10, 15, 20, 25].map((s, i) => (
+        {[0, 5, 10, 15, 20, 25].reverse().map((s, i) => (
           <text
             key={s}
-            x={(512 / 6) * i + (512 / 12)}
-            y={511}
+            y={(512 / 6) * i + (512 / 12)}
+            x={16}
             fill={`hsl(${hueForSpeed(s)}, 100%, 50%)`}
             textAnchor="middle"
           >
