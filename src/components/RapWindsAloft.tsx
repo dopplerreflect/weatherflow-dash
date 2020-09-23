@@ -31,6 +31,8 @@ const RapWindsAloft: React.FC<RAPWindsAloftProps> = ({
 
   const { type, hour, month, day, year } = data;
 
+  const surface = data.soundings?.find((s) => s.linType === 9);
+
   return (
     <div id="RAPWindsAloft">
       <div className="sounding header">
@@ -43,17 +45,20 @@ const RapWindsAloft: React.FC<RAPWindsAloftProps> = ({
           <Arrow dir={sounding.windDir} />
           <div className="center">{sounding.windDir}°</div>
           <div className="center">{sounding.temp.f}°F</div>
-          <div className="center">{sounding.dewPt.f}°F</div>
         </div>
       ))}
       <div
         style={{
-          fontFamily: "monospace",
+          // fontFamily: "monospace",
           display: "flex",
           justifyContent: "center",
         }}
       >
-        {JSON.stringify({ hourUTC: hour, latitude, longitude, elevation })}
+        {/*JSON.stringify({ hourUTC: hour, latitude, longitude, elevation })*/}
+        {surface &&
+          `Predicted Cloud base: ${
+            Math.round((surface.temp.c - surface.dewPt.c) / 2.5 * 1000)
+          } ft`}
       </div>
     </div>
   );
