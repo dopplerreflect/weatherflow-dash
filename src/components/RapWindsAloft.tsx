@@ -1,5 +1,5 @@
-import React, { memo, useEffect, useState } from 'react';
-import './RapWindsAloft.less';
+import React, { memo, useEffect, useState } from "react";
+import "./RapWindsAloft.less";
 
 const RapWindsAloft: React.FC<RAPWindsAloftProps> = ({
   latitude,
@@ -11,10 +11,10 @@ const RapWindsAloft: React.FC<RAPWindsAloftProps> = ({
   const fetchWindsAloft = async (
     latitude: number,
     longitude: number,
-    elevation: number
+    elevation: number,
   ) => {
     const result = await fetch(
-      `https://deno-winds-aloft-json.herokuapp.com/${latitude}/${longitude}/${elevation}`
+      `https://deno-winds-aloft-json.herokuapp.com/${latitude}/${longitude}/${elevation}`,
     );
     const data = await result.json();
     setData(data);
@@ -23,7 +23,7 @@ const RapWindsAloft: React.FC<RAPWindsAloftProps> = ({
   useEffect(() => {
     fetchWindsAloft(latitude, longitude, elevation);
     const interval = setInterval(() => {
-      console.log('fetching wa on interval');
+      console.log("fetching wa on interval");
       fetchWindsAloft(latitude, longitude, elevation);
     }, 1000 * 60 * 10);
     return () => clearInterval(interval);
@@ -43,13 +43,14 @@ const RapWindsAloft: React.FC<RAPWindsAloftProps> = ({
           <Arrow dir={sounding.windDir} />
           <div className="center">{sounding.windDir}°</div>
           <div className="center">{sounding.temp.f}°F</div>
+          <div className="center">{sounding.dewPt.f}°F</div>
         </div>
       ))}
       <div
         style={{
-          fontFamily: 'monospace',
-          display: 'flex',
-          justifyContent: 'center',
+          fontFamily: "monospace",
+          display: "flex",
+          justifyContent: "center",
         }}
       >
         {JSON.stringify({ hourUTC: hour, latitude, longitude, elevation })}
