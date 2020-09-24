@@ -65,29 +65,28 @@ const RapWindsAloft: React.FC<RAPWindsAloftProps> = ({
 };
 
 const Arrow: React.FC<{ dir: number }> = ({ dir }) => (
-  <svg viewBox="0 0 32 32" height="2em" width="2em">
+  <svg viewBox="0 0 512 512" height="2em" width="2em">
     <circle
-      cx="16"
-      cy="16"
-      r="15.5"
+      cx="256"
+      cy="256"
+      r="232"
       stroke="hsl(210, 100%, 75%)"
+      strokeWidth={48}
       fill="hsl(210, 100%, 25%)"
     />
     <path
-      d="M 16 31 L 11.686 20.313 L 15 16 L 15.75 1 H 16.25 L 17 16 L 20.314 20.313 Z"
+      d="
+      M 260 0 
+      L 269.56814564470153 251.59144223867975 
+      L 313.475583094649 335.1083534400135 
+      L 256 512 
+      L 198.52441690535102 335.1083534400135 
+      L 242.4318543552985 251.59144223867975 
+      L 252 0
+      Z"
       fill="hsl(30, 100%, 50%)"
-      transform={`rotate(${dir}, 16, 16)`}
+      transform={`rotate(${dir}, 256, 256)`}
     />
-    <text
-      x="48"
-      y="18"
-      dominantBaseline="middle"
-      textAnchor="middle"
-      fill="hsl(210, 100%, 75%)"
-      fontSize="0.6875em"
-    >
-      {dir}°
-    </text>
   </svg>
 );
 export default memo(RapWindsAloft);
