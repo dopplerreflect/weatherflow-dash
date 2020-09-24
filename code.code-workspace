@@ -6,5 +6,8 @@
     {
       "path": "src"
     }
-  ]
+  ],
+  "settings": {
+    "svg.preview.background": "black"
+  }
 }
