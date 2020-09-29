@@ -72,7 +72,7 @@ const Arrow: React.FC<{ dir: number }> = ({ dir }) => (
       r="237.32505032019532"
       fill="hsl(210, 100%, 33%)"
       stroke="hsl(210, 100%, 66%)"
-      stroke-width="37.349899359609346"
+      strokeWidth="37.349899359609346"
     />
     <path
       d="
