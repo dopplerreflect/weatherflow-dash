@@ -1,12 +1,9 @@
-//@ts-nocheck
-import { config } from "./deps.ts";
-
-const ENV = config();
-
-// sql experiment
+import { config } from "https://deno.land/x/dotenv/mod.ts";
+import { Client } from "https://raw.githubusercontent.com/doppler/deno-postgres/fix-for-deno-1.4.0/mod.ts";
 // import { Client } from "https://deno.land/x/postgres@v0.4.3/mod.ts";
 // import { Client } from "../../deno-postgres/mod.ts";
-import { Client } from "./deps.ts";
+
+const ENV = config();
 
 const client = new Client(
   ENV.DEVELOPMENT

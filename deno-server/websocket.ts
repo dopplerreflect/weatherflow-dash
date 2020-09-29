@@ -1,10 +1,13 @@
+import { config } from "https://deno.land/x/dotenv/mod.ts";
+import { v4 } from "https://deno.land/std/uuid/mod.ts";
 import {
-  config,
-  v4,
+  acceptWebSocket,
   isWebSocketCloseEvent,
-} from "./deps.ts";
+} from "https://deno.land/std@0.69.0/ws/mod.ts";
+
 import type { WfData, WfMessageObj } from "./types.d.ts";
 import { setCache, getCache } from "./database.ts";
+
 const ENV = config();
 
 // used to truncate data length
@@ -105,7 +108,7 @@ const sendStartRequests = (): void => {
   }));
 };
 
-export const handleWs = async (ws: any) => {
+export const handleSocketEvents = async (ws: any) => {
   let clientId = v4.generate();
 
   for await (let message of ws) {
@@ -125,4 +128,16 @@ export const handleWs = async (ws: any) => {
       sendMessage({ type: "all", data: { summary, obs_st, rapid_wind } });
     }
   }
+};
+
+export const handleSocket = async (ctx: any) => {
+  const { conn, r: bufReader, w: bufWriter, headers } =
+    ctx.request.serverRequest;
+  const socket = await acceptWebSocket({
+    conn,
+    bufReader,
+    bufWriter,
+    headers,
+  });
+  await handleSocketEvents(socket);
 };

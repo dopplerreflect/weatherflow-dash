@@ -1,55 +1,19 @@
-import { mimeTypes } from "./mime-types.ts";
-
-import {
-  // listenAndServe,
-  // acceptWebSocket,
-  // acceptable,
-  flags,
-  // path,
-  config,
-  // Application,
-  // Router,
-  // send,
-} from "./deps.ts";
+import { config } from "https://deno.land/x/dotenv/mod.ts";
+import * as flags from "https://deno.land/std/flags/mod.ts";
 import {
   Application,
   Router,
   send,
 } from "https://deno.land/x/oak@v6.2.0/mod.ts";
-import {
-  acceptable,
-  acceptWebSocket,
-  WebSocket,
-  isWebSocketPingEvent,
-  isWebSocketCloseEvent,
-} from "https://deno.land/std@0.69.0/ws/mod.ts";
-import { handleWs } from "./websocket.ts";
+import { handleSocket } from "./websocket.ts";
 
-const ENV = config();
-const script = import.meta.url.replace(/^file:\/\//, "");
-const { args } = Deno;
 const DEFAULT_PORT = 3001;
-const argPort = flags.parse(args).port;
+const ENV = config();
+const argPort = flags.parse(Deno.args).port;
 const port = argPort ? Number(argPort) : DEFAULT_PORT;
 
 const router = new Router();
 
-export const handleSocket = async (ctx: any) => {
-  if (acceptable(ctx.request.serverRequest)) {
-    const { conn, r: bufReader, w: bufWriter, headers } =
-      ctx.request.serverRequest;
-    const socket = await acceptWebSocket({
-      conn,
-      bufReader,
-      bufWriter,
-      headers,
-    });
-
-    await handleWs(socket);
-  } else {
-    throw new Error("Error when connecting websocket");
-  }
-};
 router
   .get("/ws", handleSocket)
   .get("/deployment-lat-lng-elev", async (ctx) => {
@@ -78,75 +42,3 @@ app.use(async (context) => {
 
 console.log(`Deno server listening on port ${port}`);
 await app.listen({ port });
-
-/*
-listenAndServe({ port }, async (req) => {
-  let body;
-  let headers = new Headers();
-  console.log({ proto: req.proto });
-  switch (req.url) {
-    case "/":
-      try {
-        body = await Deno.readTextFile(
-          path.join(
-            path.dirname(script),
-            "..",
-            "dist",
-            "index.html",
-          ),
-        );
-        req.respond({ body });
-      } catch (e) {
-        req.respond({ status: 404, body: "not found. was project built?" });
-      }
-      break;
-    case "/favicon.ico":
-      try {
-        body = await Deno.readTextFile(
-          path.join(path.dirname(script), "..", "src", "favicon.svg"),
-        );
-        headers.set("content-type", "image/svg+xml");
-        req.respond({ body, headers });
-      } catch (e) {
-        req.respond({ status: 404 });
-      }
-      break;
-    case "/deployment-lat-lng-elev":
-      headers.set("content-type", "application/json");
-      headers.set("access-control-allow-origin", "http://localhost:1234");
-      const bodyJSON = Deno.env.get("WINDS_ALOFT_QUERY_DATA") ||
-        ENV.WINDS_ALOFT_QUERY_DATA ||
-        JSON.stringify({ latitude: null, longitude: null, elevation: null });
-      console.log(bodyJSON);
-      body = JSON.parse(bodyJSON);
-      req.respond({ body, headers });
-      break;
-    case "/ws":
-      if (acceptable(req)) {
-        const { conn, r: bufReader, w: bufWriter, headers } = req;
-        acceptWebSocket({
-          conn,
-          bufReader,
-          bufWriter,
-          headers,
-        }).then(handleWs);
-      }
-      break;
-    default:
-      body = `${req.url}: not found`;
-      const match: RegExpMatchArray | null = req.url.match(/\.(\w+)$/);
-      const ext = match && match[1];
-      if (ext) headers.set("content-type", mimeTypes[ext]);
-      try {
-        body = await Deno.readFile(
-          path.join(path.dirname(script), "..", "dist", req.url),
-        );
-        console.log(req.url, headers);
-        req.respond({ body, headers });
-      } catch (e) {
-        console.error(body, e);
-        req.respond({ body, status: 404 });
-      }
-  }
-});
-*/
