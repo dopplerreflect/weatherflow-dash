@@ -1,12 +1,28 @@
 import { mimeTypes } from "./mime-types.ts";
+
 import {
-  listenAndServe,
-  acceptWebSocket,
-  acceptable,
+  // listenAndServe,
+  // acceptWebSocket,
+  // acceptable,
   flags,
-  path,
+  // path,
   config,
+  // Application,
+  // Router,
+  // send,
 } from "./deps.ts";
+import {
+  Application,
+  Router,
+  send,
+} from "https://deno.land/x/oak@v6.2.0/mod.ts";
+import {
+  acceptable,
+  acceptWebSocket,
+  WebSocket,
+  isWebSocketPingEvent,
+  isWebSocketCloseEvent,
+} from "https://deno.land/std@0.69.0/ws/mod.ts";
 import { handleWs } from "./websocket.ts";
 
 const ENV = config();
@@ -16,8 +32,54 @@ const DEFAULT_PORT = 3001;
 const argPort = flags.parse(args).port;
 const port = argPort ? Number(argPort) : DEFAULT_PORT;
 
-console.log(`Deno server listening on port ${port}`);
+const router = new Router();
 
+export const handleSocket = async (ctx: any) => {
+  if (acceptable(ctx.request.serverRequest)) {
+    const { conn, r: bufReader, w: bufWriter, headers } =
+      ctx.request.serverRequest;
+    const socket = await acceptWebSocket({
+      conn,
+      bufReader,
+      bufWriter,
+      headers,
+    });
+
+    await handleWs(socket);
+  } else {
+    throw new Error("Error when connecting websocket");
+  }
+};
+router
+  .get("/ws", handleSocket)
+  .get("/deployment-lat-lng-elev", async (ctx) => {
+    ctx.response.headers.append("content-type", "application/json");
+    ctx.response.headers.append(
+      "access-control-allow-origin",
+      "http://localhost:1234",
+    );
+    const bodyJSON = Deno.env.get("WINDS_ALOFT_QUERY_DATA") ||
+      ENV.WINDS_ALOFT_QUERY_DATA ||
+      JSON.stringify({ latitude: null, longitude: null, elevation: null });
+    console.log(bodyJSON);
+    ctx.response.body = JSON.parse(bodyJSON);
+  });
+const app = new Application();
+
+app.use(router.routes());
+app.use(router.allowedMethods());
+
+app.use(async (context) => {
+  await send(context, context.request.url.pathname, {
+    root: `${Deno.cwd()}/dist`,
+    index: "index.html",
+  });
+});
+
+console.log(`Deno server listening on port ${port}`);
+await app.listen({ port });
+
+/*
 listenAndServe({ port }, async (req) => {
   let body;
   let headers = new Headers();
@@ -87,3 +149,4 @@ listenAndServe({ port }, async (req) => {
       }
   }
 });
+*/
