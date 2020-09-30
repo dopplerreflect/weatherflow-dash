@@ -8,40 +8,9 @@ import Clock from "./components/clock.svg";
 import QRCode from "./public/qrcode.svg";
 import "./App.css";
 
-type RapCoords = {
-  latitude: number;
-  longitude: number;
-  elevation: number;
-};
-
 const App = () => {
   const { obs_st, rapid_wind, summary } = useContext(SocketContext);
   const latest_obs_st = obs_st[obs_st.length - 1];
-  const [{ latitude, longitude, elevation }, setRapCoords]: [
-    Partial<RapCoords>,
-    any,
-  ] = useState({});
-
-  const fetchRapWindsAloftCoords = async () => {
-    const URL = document.location.hostname === "localhost"
-      ? "http://localhost:3001/deployment-lat-lng-elev"
-      : `${document.location.protocol}//${document.location.host}/deployment-lat-lng-elev`;
-    const response = await fetch(URL);
-    const json = await response.json();
-    try {
-      const rapCoords = json;
-      setRapCoords(rapCoords);
-    } catch (e) {
-      console.error(
-        "Got invalid winds aloft coords",
-        'Set an environment variable on the server. Example: WINDS_ALOFT_QUERY_DATA={"latitude":33.97,"longitude":-85.17,"elevation":261}',
-      );
-    }
-  };
-
-  useEffect(() => {
-    fetchRapWindsAloftCoords();
-  }, []);
 
   return (
     <div id="App">
@@ -78,9 +47,7 @@ const App = () => {
         <Graph label="Winds" obs_st={obs_st} />
       </div>
       <div id="rest">
-        {latitude && longitude && elevation && (
-          <RapWindsAloft {...{ latitude, longitude, elevation }} />
-        )}
+        <RapWindsAloft />
       </div>
       <div id="qrcode" style={{ backgroundColor: "white" }}>
         <img src={QRCode} />

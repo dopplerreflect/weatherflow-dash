@@ -1,40 +1,27 @@
 import React, { memo, useEffect, useState } from "react";
 import "./RapWindsAloft.less";
 
-const RapWindsAloft: React.FC<RAPWindsAloftProps> = ({
-  latitude,
-  longitude,
-  elevation,
-}) => {
+const RapWindsAloft: React.FC<RAPWindsAloftProps> = () => {
   const [data, setData]: [Partial<RAPWindsAloftData>, any] = useState({});
 
-  const fetchWindsAloft = async (
-    latitude: number,
-    longitude: number,
-    elevation: number,
-  ) => {
+  const fetchWindsAloft = async () => {
     const host = document.location.hostname === "localhost"
       ? "http://localhost:3001"
       : `${document.location.protocol}//${document.location.host}`;
-    const url = `${host}/winds-aloft/${latitude}/${longitude}/${elevation}`;
-    const result = await fetch(
-      url,
-      // `https://deno-winds-aloft-json.herokuapp.com/${latitude}/${longitude}/${elevation}`,
-    );
+    const url = `${host}/winds-aloft`;
+    const result = await fetch(url);
     const data = await result.json();
     setData(data);
   };
 
   useEffect(() => {
-    fetchWindsAloft(latitude, longitude, elevation);
+    fetchWindsAloft();
     const interval = setInterval(() => {
       console.log("fetching wa on interval");
-      fetchWindsAloft(latitude, longitude, elevation);
+      fetchWindsAloft();
     }, 1000 * 60 * 10);
     return () => clearInterval(interval);
-  }, [latitude, longitude, elevation]);
-
-  const { type, hour, month, day, year } = data;
+  }, []);
 
   const surface = data.soundings?.find((s) => s.linType === 9);
 
@@ -54,12 +41,10 @@ const RapWindsAloft: React.FC<RAPWindsAloftProps> = ({
       ))}
       <div
         style={{
-          // fontFamily: "monospace",
           display: "flex",
           justifyContent: "center",
         }}
       >
-        {/*JSON.stringify({ hourUTC: hour, latitude, longitude, elevation })*/}
         {surface &&
           `Predicted Cloud base: ${
             Math.round((surface.temp.c - surface.dewPt.c) / 2.5 * 1000)
