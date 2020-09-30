@@ -7,10 +7,6 @@ import {
 import { handleSocket } from "./websocket.ts";
 import { handleWindsAloftRequest } from "./winds-aloft.ts";
 
-const DEFAULT_PORT = 3001;
-const argPort = flags.parse(Deno.args).port;
-const port = argPort ? Number(argPort) : DEFAULT_PORT;
-
 const router = new Router();
 
 router
@@ -28,6 +24,10 @@ app.use(async (context) => {
     index: "index.html",
   });
 });
+
+const DEFAULT_PORT = 3001;
+const argPort = flags.parse(Deno.args).port;
+const port = argPort ? Number(argPort) : DEFAULT_PORT;
 
 console.log(`Deno server listening on port ${port}`);
 await app.listen({ port });
