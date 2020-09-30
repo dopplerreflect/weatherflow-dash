@@ -61,7 +61,6 @@ wsClient.addEventListener("close", (event: any) => {
 
 wsClient.addEventListener("message", async function (message) {
   const messageObj: WfMessageObj = JSON.parse(message.data);
-  let cacheRes;
   console.log(
     messageObj.type,
     messageObj.type === "obs_st"
@@ -76,9 +75,7 @@ wsClient.addEventListener("message", async function (message) {
       data.rapid_wind.length > MAX_RAPID_WIND_ENTRIES &&
         data.rapid_wind.shift();
       sendMessage({ type: "rapid_wind", rapid_wind: data.rapid_wind });
-      // await Deno.writeTextFile("data.json", JSON.stringify(data));
-      cacheRes = await setCache(JSON.stringify(data));
-      // console.log(cacheRes.command);
+      await setCache(JSON.stringify(data));
       break;
     case "obs_st":
       data.obs_st.push(messageObj.obs[0]);
@@ -86,9 +83,8 @@ wsClient.addEventListener("message", async function (message) {
       sendMessage({ type: "obs_st", obs_st: data.obs_st });
       data.summary = messageObj.summary;
       sendMessage({ type: "summary", summary: data.summary });
-      // await Deno.writeTextFile("data.json", JSON.stringify(data));
-      cacheRes = await setCache(JSON.stringify(data));
-      // console.log(cacheRes.command);
+      await setCache(JSON.stringify(data));
+      break;
     default:
       break;
   }
