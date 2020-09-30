@@ -13,8 +13,13 @@ const RapWindsAloft: React.FC<RAPWindsAloftProps> = ({
     longitude: number,
     elevation: number,
   ) => {
+    const host = document.location.hostname === "localhost"
+      ? "http://localhost:3001"
+      : `${document.location.protocol}//${document.location.host}`;
+    const url = `${host}/winds-aloft/${latitude}/${longitude}/${elevation}`;
     const result = await fetch(
-      `https://deno-winds-aloft-json.herokuapp.com/${latitude}/${longitude}/${elevation}`,
+      url,
+      // `https://deno-winds-aloft-json.herokuapp.com/${latitude}/${longitude}/${elevation}`,
     );
     const data = await result.json();
     setData(data);
