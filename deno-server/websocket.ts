@@ -57,6 +57,7 @@ wsClient.addEventListener("open", function () {
 
 wsClient.addEventListener("close", (event: any) => {
   console.log("close", event);
+  sendStartRequests();
 });
 
 wsClient.addEventListener("message", async function (message) {
