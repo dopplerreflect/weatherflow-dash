@@ -39,12 +39,13 @@ const App = () => {
         />
       </div>
       <div id="anemometer">
-        <Windchart
+        {/* <Windchart
           rapid_wind={rapid_wind.map((e) => ({ ...e, mps: e.mps * 2.237 }))}
-        />
+        /> */}
+        <AnemometerOnTheFritz />
       </div>
       <div id="windgraph">
-        <Graph label="Winds" obs_st={obs_st} />
+        {/* <Graph label="Winds" obs_st={obs_st} /> */}
       </div>
       <div id="rest">
         <RapWindsAloft />
@@ -57,3 +58,5 @@ const App = () => {
 };
 
 export default App;
+
+const AnemometerOnTheFritz = () => <div><h2>DZ ground wind reporting is currently offline due to equipment issue.</h2><p>The anemometer is on the fritz. I've filed a trouble ticket with Weatherflow, Inc.</p></div>

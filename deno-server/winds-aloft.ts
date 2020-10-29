@@ -86,7 +86,7 @@ export const handleWindsAloftRequest = async (ctx: any) => {
     ctx.response.type = "application/json";
     ctx.response.headers.append(
       "access-control-allow-origin",
-      "http://localhost:1234",
+      "*",
     );
     ctx.response.body = transformWindsAloftData(body);
   } catch (err) {
