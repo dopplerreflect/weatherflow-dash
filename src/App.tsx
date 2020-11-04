@@ -4,7 +4,9 @@ import Windchart from "./components/Windchart";
 import Graph from "./components/Graph";
 import RapWindsAloft from "./components/RapWindsAloft";
 import SocketContext from "./components/SocketContext/context";
+//@ts-ignore
 import Clock from "./components/clock.svg";
+//@ts-ignore
 import QRCode from "./public/qrcode.svg";
 import "./App.css";
 
