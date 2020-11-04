@@ -1,7 +1,7 @@
 import React, { memo, useEffect, useState } from "react";
 import "./RapWindsAloft.less";
 
-const RapWindsAloft: React.FC<RAPWindsAloftProps> = () => {
+const RapWindsAloft: React.FC = () => {
   const [data, setData]: [Partial<RAPWindsAloftData>, any] = useState({});
 
   const fetchWindsAloft = async () => {
