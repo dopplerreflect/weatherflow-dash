@@ -163,7 +163,7 @@ const Graph: React.FC<WindGraphProps> = function ({ obs_st }) {
             (width - 6) / values.length / 2 +
             i * ((width - 6) / values.length);
           return (
-            i % 10 === 0 &&
+            i % 5 === 0 &&
             i !== 0 && (
               <g className="x-axis-mark" key={i}>
                 <line
