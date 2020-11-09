@@ -1,2 +1,2 @@
-export const opacityForAge = (length: number, i: number) =>
-  0 + (1 / length) * i;
+export const opacityForAge = (length: number, i: number) => 1
+  // 0 + (1 / length) * i;
