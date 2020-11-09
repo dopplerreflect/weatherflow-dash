@@ -6,13 +6,13 @@ import {
 } from "https://deno.land/std@0.69.0/ws/mod.ts";
 
 import type { WfData, WfMessageObj } from "./types.d.ts";
-import { setCache, getCache } from "./database.ts";
+import { getCache, setCache } from "./database.ts";
 
 const ENV = config();
 
 // used to truncate data length
-const MAX_RAPID_WIND_ENTRIES = (60 / 3) * 60;
-const MAX_OBS_ST_ENTRIES = 60;
+const MAX_RAPID_WIND_ENTRIES = (60 / 3) * 30;
+const MAX_OBS_ST_ENTRIES = 30;
 
 const WEATHERFLOW_API_KEY = Deno.env.toObject()["WEATHERFLOW_API_KEY"];
 const WEATHERFLOW_DEVICE_ID = Deno.env.toObject()["WEATHERFLOW_DEVICE_ID"];
@@ -75,13 +75,20 @@ wsClient.addEventListener("message", async function (message) {
       data.rapid_wind.push(messageObj.ob);
       data.rapid_wind.length > MAX_RAPID_WIND_ENTRIES &&
         data.rapid_wind.shift();
-      sendMessage({ type: "rapid_wind", rapid_wind: data.rapid_wind });
+      sendMessage(
+        {
+          type: "rapid_wind",
+          rapid_wind: data.rapid_wind.slice(-MAX_RAPID_WIND_ENTRIES),
+        },
+      );
       await setCache(JSON.stringify(data));
       break;
     case "obs_st":
       data.obs_st.push(messageObj.obs[0]);
       data.obs_st.length > MAX_OBS_ST_ENTRIES && data.obs_st.shift();
-      sendMessage({ type: "obs_st", obs_st: data.obs_st });
+      sendMessage(
+        { type: "obs_st", obs_st: data.obs_st.slice(-MAX_OBS_ST_ENTRIES) },
+      );
       data.summary = messageObj.summary;
       sendMessage({ type: "summary", summary: data.summary });
       await setCache(JSON.stringify(data));
