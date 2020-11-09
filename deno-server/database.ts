@@ -1,7 +1,5 @@
 import { config } from "https://deno.land/x/dotenv/mod.ts";
 import { Client } from "https://raw.githubusercontent.com/doppler/deno-postgres/fix-for-deno-1.4.0/mod.ts";
-// import { Client } from "https://deno.land/x/postgres@v0.4.3/mod.ts";
-// import { Client } from "../../deno-postgres/mod.ts";
 
 const ENV = config();
 
