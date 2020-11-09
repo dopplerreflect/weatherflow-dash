@@ -129,7 +129,16 @@ export const handleSocketEvents = async (ws: any) => {
         ws,
       });
       const { summary, obs_st, rapid_wind } = data;
-      sendMessage({ type: "all", data: { summary, obs_st, rapid_wind } });
+      sendMessage(
+        {
+          type: "all",
+          data: {
+            summary,
+            obs_st: obs_st.slice(-MAX_OBS_ST_ENTRIES),
+            rapid_wind: rapid_wind.slice(-MAX_RAPID_WIND_ENTRIES),
+          },
+        },
+      );
     }
   }
 };
