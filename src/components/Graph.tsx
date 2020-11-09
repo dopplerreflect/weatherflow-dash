@@ -18,6 +18,8 @@ const Graph: React.FC<WindGraphProps> = function ({ obs_st }) {
   const width = window.innerHeight * 0.75;
   const height = window.innerHeight * 0.25;
   const graphHeight = height - 21;
+  const leftPad = 64;
+  const graphWidth = width - leftPad - 6;
   let maxValue = Math.max(...values.map(v => v.wind_gust)) || 16;
   maxValue = maxValue < 6 ? 6 : maxValue;
 
@@ -53,20 +55,20 @@ const Graph: React.FC<WindGraphProps> = function ({ obs_st }) {
             {v.wind_gust && (
               <>
                 <rect
-                  x={2 + i * ((width - 6) / values.length)}
+                  x={leftPad + i * (graphWidth / values.length)}
                   y={graphHeight - (graphHeight / maxValue) * v.wind_gust}
-                  width={(width - 6) / values.length}
+                  width={graphWidth / values.length}
                   height={(graphHeight / maxValue) * v.wind_gust}
                   fill={`hsla(${hueForSpeed(v.wind_gust)}, 100%, 50%, 0.5)`}
                   stroke={`hsla(${hueForSpeed(v.wind_gust)}, 100%, 50%, 1)`}
                   opacity={opacityForAge(values.length, i)}
                 />
                 <line
-                  x1={2 + i * ((width - 6) / values.length)}
+                  x1={leftPad + i * (graphWidth / values.length)}
                   x2={
-                    2 +
-                    i * ((width - 6) / values.length) +
-                    (width - 6) / values.length
+                    leftPad +
+                    i * (graphWidth / values.length) +
+                    graphWidth / values.length
                   }
                   y1={graphHeight - (graphHeight / maxValue) * v.wind_gust}
                   y2={graphHeight - (graphHeight / maxValue) * v.wind_gust}
@@ -78,20 +80,20 @@ const Graph: React.FC<WindGraphProps> = function ({ obs_st }) {
             {v.wind_avg && (
               <>
                 <rect
-                  x={2 + i * ((width - 6) / values.length)}
+                  x={leftPad + i * (graphWidth / values.length)}
                   y={graphHeight - (graphHeight / maxValue) * v.wind_avg}
-                  width={(width - 6) / values.length}
+                  width={graphWidth / values.length}
                   height={(graphHeight / maxValue) * v.wind_avg}
                   fill={`hsla(${hueForSpeed(v.wind_avg)}, 100%, 50%, 0.5)`}
                   stroke={`hsla(${hueForSpeed(v.wind_avg)}, 100%, 50%, 1)`}
                   opacity={opacityForAge(values.length, i)}
                 />
                 <line
-                  x1={2 + i * ((width - 6) / values.length)}
+                  x1={leftPad + i * (graphWidth / values.length)}
                   x2={
-                    2 +
-                    i * ((width - 6) / values.length) +
-                    (width - 6) / values.length
+                    leftPad +
+                    i * (graphWidth / values.length) +
+                    graphWidth / values.length
                   }
                   y1={graphHeight - (graphHeight / maxValue) * v.wind_avg}
                   y2={graphHeight - (graphHeight / maxValue) * v.wind_avg}
@@ -103,20 +105,20 @@ const Graph: React.FC<WindGraphProps> = function ({ obs_st }) {
             {v.wind_lull && (
               <>
                 <rect
-                  x={2 + i * ((width - 6) / values.length)}
+                  x={leftPad + i * (graphWidth / values.length)}
                   y={graphHeight - (graphHeight / maxValue) * v.wind_lull}
-                  width={(width - 6) / values.length}
+                  width={graphWidth / values.length}
                   height={(graphHeight / maxValue) * v.wind_lull}
                   fill={`hsla(${hueForSpeed(v.wind_lull)}, 100%, 50%, 0.5)`}
                   stroke={`hsla(${hueForSpeed(v.wind_lull)}, 100%, 50%, 1)`}
                   opacity={opacityForAge(values.length, i)}
                 />
                 <line
-                  x1={2 + i * ((width - 6) / values.length)}
+                  x1={leftPad + i * (graphWidth / values.length)}
                   x2={
-                    2 +
-                    i * ((width - 6) / values.length) +
-                    (width - 6) / values.length
+                    leftPad +
+                    i * (graphWidth / values.length) +
+                    graphWidth / values.length
                   }
                   y1={graphHeight - (graphHeight / maxValue) * v.wind_lull}
                   y2={graphHeight - (graphHeight / maxValue) * v.wind_lull}
@@ -159,24 +161,24 @@ const Graph: React.FC<WindGraphProps> = function ({ obs_st }) {
         />
         {values.map((_, i) => {
           const x =
-            2 +
-            (width - 6) / values.length / 2 +
-            i * ((width - 6) / values.length);
+            leftPad +
+            graphWidth / values.length / 2 +
+            i * (graphWidth / values.length);
           return (
             i % 5 === 0 &&
             i !== 0 && (
               <g className="x-axis-mark" key={i}>
                 <line
                   x1={
-                    2 +
-                    (width - 6) / values.length / 2 +
-                    i * ((width - 6) / values.length)
+                    leftPad +
+                    graphWidth / values.length / 2 +
+                    i * (graphWidth / values.length)
                   }
                   y1={graphHeight}
                   x2={
-                    2 +
-                    (width - 6) / values.length / 2 +
-                    i * ((width - 6) / values.length)
+                    leftPad +
+                    graphWidth / values.length / 2 +
+                    i * (graphWidth / values.length)
                   }
                   y2={graphHeight + 5}
                   stroke="white"
