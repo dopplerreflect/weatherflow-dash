@@ -46,7 +46,7 @@ const RapWindsAloft: React.FC = () => {
         }}
       >
         {surface &&
-          `Predicted Cloud base: ${
+          `Calculated Cloud base: ${
             Math.round((surface.temp.c - surface.dewPt.c) / 2.5 * 1000)
           } ft`}
       </div>
