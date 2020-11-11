@@ -121,8 +121,8 @@ const Windchart: React.FC<Props> = ({ rapid_wind }) => {
           <text
             className="velocity-text"
             style={{
-              stroke: `hsl(${hueForSpeed(latestMps)}, 100%, 50%)`,
-              fill: `hsla(${hueForSpeed(latestMps)}, 100%, 50%, 0.25)`,
+              // stroke: `hsl(${hueForSpeed(latestMps)}, 100%, 50%)`,
+              fill: `hsla(${hueForSpeed(latestMps)}, 100%, 50%, 0.66)`,
             }}
             id="velocityText"
             x="256"
@@ -130,7 +130,7 @@ const Windchart: React.FC<Props> = ({ rapid_wind }) => {
           >
             {Math.round(latestMps)}
           </text>
-          <text className="velocity-legend" x="256" y="325">
+          <text className="velocity-legend" x="256" y="325" style={{fillOpacity: 0.66 }}>
             {latestDir}°
           </text>
         </g>
