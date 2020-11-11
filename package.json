@@ -16,7 +16,10 @@
     "theme": "#060d13",
     "generateIconOptions": {
       "baseIcon": "./src/public/favicon.svg",
-      "purpose": ["any", "maskable"],
+      "purpose": [
+        "any",
+        "maskable"
+      ],
       "genFavicons": true
     }
   },
@@ -34,7 +37,7 @@
     "workbox-cli": "^5.1.4"
   },
   "dependencies": {
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
   }
 }
