@@ -5,7 +5,7 @@ import Graph from "./components/Graph";
 import RapWindsAloft from "./components/RapWindsAloft";
 import SocketContext from "./components/SocketContext/context";
 //@ts-ignore
-import Clock from "./components/clock.svg";
+// import Clock from "./components/clock.svg";
 //@ts-ignore
 import QRCode from "./public/qrcode.svg";
 import "./App.css";
@@ -16,29 +16,30 @@ const App = () => {
 
   return (
     <div id="App">
+      <div id='header'>header</div>
       <div id="clock">
-        <iframe frameBorder={0} src={Clock} width="100%" height="100%" />
+        {/* <iframe frameBorder={0} src={Clock} width="100%" height="100%" /> */}
       </div>
       <div id="temp">
-        <Stat
+        {/* <Stat
           value={(latest_obs_st.air_temperature * 1.8 + 32).toFixed(1)}
           label="Temperature"
           unit="°F"
-        />
+        /> */}
       </div>
       <div id="humidity">
-        <Stat
+        {/* <Stat
           value={latest_obs_st.relative_humidity}
           label="Humidity"
           unit="%"
-        />
+        /> */}
       </div>
       <div id="feelslike">
-        <Stat
+        {/* <Stat
           value={(summary.feels_like * 1.8 + 32).toFixed(1)}
           label="Feels Like"
           unit="°F"
-        />
+        /> */}
       </div>
       <div id="anemometer">
         <Windchart
@@ -48,7 +49,7 @@ const App = () => {
       <div id="windgraph">
         <Graph label="Winds" obs_st={obs_st} />
       </div>
-      <div id="rest">
+      <div id="windsaloft">
         <RapWindsAloft />
       </div>
       <div id="qrcode" style={{ backgroundColor: "white" }}>

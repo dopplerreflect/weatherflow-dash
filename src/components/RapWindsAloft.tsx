@@ -27,9 +27,6 @@ const RapWindsAloft: React.FC = () => {
 
   return (
     <div id="RAPWindsAloft">
-      <div className="sounding header">
-        <div className="center">Winds Aloft</div>
-      </div>
       {data.soundings?.reverse().map((sounding, i) => (
         <div className="sounding" key={i}>
           <div className="center">{sounding.height.feet} ft.</div>
