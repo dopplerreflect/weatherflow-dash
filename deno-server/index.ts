@@ -6,12 +6,14 @@ import {
 } from "https://deno.land/x/oak@v6.2.0/mod.ts";
 import { handleSocket } from "./websocket.ts";
 import { handleWindsAloftRequest } from "./winds-aloft.ts";
+import { handleSunsetRequest } from "./sunset.ts";
 
 const router = new Router();
 
 router
   .get("/ws", handleSocket)
-  .get("/winds-aloft", handleWindsAloftRequest);
+  .get("/winds-aloft", handleWindsAloftRequest)
+  .get("/sunset", handleSunsetRequest);
 
 const app = new Application();
 
