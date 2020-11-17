@@ -82,8 +82,7 @@ body {
 }
 #App #qrcode {
   grid-area: qrcode;
-  width: var(--row-height);
-  height: var(--row-height);
+  display: none;
 }
 #App {
   grid-template-columns: calc(((100vh - 3em) / 4) * 3) 1fr;
@@ -95,24 +94,22 @@ body {
     'anemometer windsaloft'
     'anemometer windsaloft'
     'anemometer windsaloft'
-    'windgraph  windsaloft'
-    'qrcode qrcode';
+    'windgraph  windsaloft';
 }
 @media (max-aspect-ratio: 14/9) {
   #App {
-    --column-width: calc((100vw / 4) - 5px);
-    grid-template-columns:
-      var(--column-width) var(--column-width) var(--column-width)
-      var(--column-width);
-    grid-template-rows: calc(100vw / 4) auto;
+    grid-template-columns: 100vw;
+    grid-template-rows: auto;
     grid-template-areas:
-      'clock temp humidity feelslike'
-      'anemometer anemometer anemometer anemometer'
-      'windgraph windgraph windgraph windgraph'
-      'windsaloft windsaloft windsaloft windsaloft';
+      'header'
+      'anemometer'
+      'windgraph'
+      'windsaloft'
+      'qrcode';
   }
   #App #qrcode {
     width: 50vw;
-    margin: 25vw;
+    margin-left: 25vw;
+    display: block;
   }
 }

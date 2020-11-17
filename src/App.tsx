@@ -38,7 +38,6 @@ const App = () => {
   return (
     <div id="App">
       <div id="header">
-        <div id="title">Spaceland Atlanta Current Winds</div>
         <div id="temp">
           Temperature: {(latest_obs_st.air_temperature * 1.8 + 32).toFixed(1)}{' '}
           °F
