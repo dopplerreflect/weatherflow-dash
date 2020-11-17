@@ -1,12 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
-import Stat from './components/Stat';
 import Windchart from './components/Windchart';
 import Graph from './components/Graph';
 import RapWindsAloft from './components/RapWindsAloft';
 import SocketContext from './components/SocketContext/context';
-//@ts-ignore
-// import Clock from "./components/clock.svg";
-//@ts-ignore
 import QRCode from './public/qrcode.svg';
 import './App.css';
 
@@ -43,30 +39,6 @@ const App = () => {
           °F
         </div>
         <div id="sunset">Sunset: {sunset}</div>
-      </div>
-      <div id="clock">
-        {/* <iframe frameBorder={0} src={Clock} width="100%" height="100%" /> */}
-      </div>
-      <div id="temp">
-        {/* <Stat
-          value={(latest_obs_st.air_temperature * 1.8 + 32).toFixed(1)}
-          label="Temperature"
-          unit="°F"
-        /> */}
-      </div>
-      <div id="humidity">
-        {/* <Stat
-          value={latest_obs_st.relative_humidity}
-          label="Humidity"
-          unit="%"
-        /> */}
-      </div>
-      <div id="feelslike">
-        {/* <Stat
-          value={(summary.feels_like * 1.8 + 32).toFixed(1)}
-          label="Feels Like"
-          unit="°F"
-        /> */}
       </div>
       <div id="anemometer">
         <Windchart

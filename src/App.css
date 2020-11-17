@@ -59,18 +59,6 @@ body {
 #App #header > div:last-child {
   text-align: right;
 }
-#App #clock {
-  grid-area: clock;
-}
-#App #temp {
-  grid-area: temp;
-}
-#App #humidity {
-  grid-area: humidity;
-}
-#App #feelslike {
-  grid-area: feelslike;
-}
 #App #anemometer {
   grid-area: anemometer;
 }
