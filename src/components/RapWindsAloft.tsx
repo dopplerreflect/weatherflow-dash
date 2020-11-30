@@ -30,7 +30,7 @@ const RapWindsAloft: React.FC = () => {
     <div id="RAPWindsAloft">
       {data.soundings?.reverse().map((sounding, i) => (
         <div className="sounding" key={i}>
-          <div className="center">{sounding.altitude.feetMSL} ft.</div>
+          <div className="center">{sounding.altitude.feetAGL} ft.</div>
           <div className="center">{sounding.windSpd.mph} mph</div>
           <Arrow dir={sounding.windDir} />
           <div className="center">{sounding.windDir}°</div>
