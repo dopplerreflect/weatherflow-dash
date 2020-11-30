@@ -13,6 +13,7 @@ const router = new Router();
 router
   .get("/ws", handleSocket)
   .get("/winds-aloft", handleWindsAloftRequest)
+  .get("/winds-aloft/:latitude/:longitude/:elevation", handleWindsAloftRequest)
   .get("/sunset", handleSunsetRequest);
 
 const app = new Application();

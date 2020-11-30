@@ -1,13 +1,14 @@
-import React, { memo, useEffect, useState } from "react";
-import "./RapWindsAloft.less";
+import React, { memo, useEffect, useState } from 'react';
+import './RapWindsAloft.less';
 
 const RapWindsAloft: React.FC = () => {
   const [data, setData]: [Partial<RAPWindsAloftData>, any] = useState({});
 
   const fetchWindsAloft = async () => {
-    const host = document.location.hostname === "localhost"
-      ? "http://localhost:3001"
-      : `${document.location.protocol}//${document.location.host}`;
+    const host =
+      document.location.hostname === 'localhost'
+        ? 'http://localhost:3001'
+        : `${document.location.protocol}//${document.location.host}`;
     const url = `${host}/winds-aloft`;
     const result = await fetch(url);
     const data = await result.json();
@@ -17,19 +18,19 @@ const RapWindsAloft: React.FC = () => {
   useEffect(() => {
     fetchWindsAloft();
     const interval = setInterval(() => {
-      console.log("fetching wa on interval");
+      console.log('fetching wa on interval');
       fetchWindsAloft();
     }, 1000 * 60 * 10);
     return () => clearInterval(interval);
   }, []);
 
-  const surface = data.soundings?.find((s) => s.linType === 9);
+  const surface = data.soundings?.find(s => s.linType === 9);
 
   return (
     <div id="RAPWindsAloft">
       {data.soundings?.reverse().map((sounding, i) => (
         <div className="sounding" key={i}>
-          <div className="center">{sounding.height.feet} ft.</div>
+          <div className="center">{sounding.altitude.feetMSL} ft.</div>
           <div className="center">{sounding.windSpd.mph} mph</div>
           <Arrow dir={sounding.windDir} />
           <div className="center">{sounding.windDir}°</div>
@@ -38,14 +39,14 @@ const RapWindsAloft: React.FC = () => {
       ))}
       <div
         style={{
-          display: "flex",
-          justifyContent: "center",
+          display: 'flex',
+          justifyContent: 'center',
         }}
       >
         {surface &&
-          `Calculated Cloud base: ${
-            Math.round((surface.temp.c - surface.dewPt.c) / 2.5 * 1000)
-          } ft`}
+          `Calculated Cloud base: ${Math.round(
+            ((surface.temp.c - surface.dewPt.c) / 2.5) * 1000
+          )} ft`}
       </div>
     </div>
   );

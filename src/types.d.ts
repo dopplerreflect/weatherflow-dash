@@ -56,12 +56,14 @@ type SetSocketStateProps = {
   setValue: React.Dispatch<React.SetStateAction<SocketState>>;
 };
 
-type Sounding = {
+export type Sounding = {
   linType: number;
   pressure: number;
-  height: {
-    meters: number;
-    feet: number;
+  altitude: {
+    metersAGL: number;
+    feetAGL: number;
+    metersMSL: number;
+    feetMSL: number;
   };
   temp: {
     c: number;
@@ -78,7 +80,9 @@ type Sounding = {
   };
 };
 
-type RAPWindsAloftData = {
+export type RAPWindsAloftData = {
+  header: string;
+  op40: string;
   type: string;
   hour: number;
   month: string;
@@ -86,5 +90,6 @@ type RAPWindsAloftData = {
   year: number;
   latitude: number;
   longitude: number;
+  elevation: number;
   soundings: Sounding[];
 };

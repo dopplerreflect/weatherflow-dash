@@ -1,12 +1,13 @@
 import { config } from "https://deno.land/x/dotenv/mod.ts";
+import type { RouterContext } from "https://deno.land/x/oak@v6.2.0/mod.ts";
 
 const ENV = config();
 const WINDS_ALOFT_QUERY_DATA = ENV.WINDS_ALOFT_QUERY_DATA ||
   Deno.env.get("WINDS_ALOFT_QUERY_DATA") ||
   JSON.stringify({ latitude: null, longitude: null, elevation: null });
-const { latitude, longitude, elevation } = JSON.parse(WINDS_ALOFT_QUERY_DATA);
+let { latitude, longitude, elevation } = JSON.parse(WINDS_ALOFT_QUERY_DATA);
 
-const fetchWindsAloftData = async () => {
+const fetchWindsAloftData = async (latitude: number, longitude: number) => {
   const queryObj = {
     airport: `${latitude}%2C${longitude}`,
     startSecs: Math.floor(Date.now() / 1000),
@@ -26,14 +27,21 @@ const fetchWindsAloftData = async () => {
   return body;
 };
 
-const transformWindsAloftData = (body: Uint8Array) => {
+const transformWindsAloftData = (
+  body: Uint8Array,
+  elevation: number,
+) => {
   const decodedBody = new TextDecoder().decode(body);
-  const [, op40, , cape1, , , surface, , ...rest] = decodedBody.split(/\n/);
+  const [header, op40, , cape1, , , surface, , ...rest] = decodedBody.split(
+    /\n/,
+  );
   const [type, hour, day, month, year] = op40.split(/[\s]+/);
   const [, , , , latitude, longitude] = cape1.split(/[\s]+/);
   const soundings = [surface, ...rest];
 
   return {
+    header,
+    op40,
     type,
     hour: Number(hour),
     month,
@@ -48,7 +56,7 @@ const transformWindsAloftData = (body: Uint8Array) => {
           ,
           linType,
           pressure,
-          height,
+          altitudeMSL,
           temp,
           dewPt,
           windDir,
@@ -57,9 +65,11 @@ const transformWindsAloftData = (body: Uint8Array) => {
         return {
           linType,
           pressure: pressure / 10,
-          height: {
-            meters: height - elevation,
-            feet: Math.round((height - elevation) * 3.28084),
+          altitude: {
+            metersAGL: Math.round(altitudeMSL - elevation),
+            feetAGL: Math.round((altitudeMSL - elevation) * 3.28084),
+            metersMSL: altitudeMSL,
+            feetMSL: Math.round(altitudeMSL * 3.28084),
           },
           temp: {
             c: temp / 10,
@@ -76,19 +86,24 @@ const transformWindsAloftData = (body: Uint8Array) => {
           },
         };
       })
-      .filter((o) => o.height.feet < 16000),
+      .filter((o) => o.altitude.feetAGL < 16000),
   };
 };
 
-export const handleWindsAloftRequest = async (ctx: any) => {
+export const handleWindsAloftRequest = async (ctx: RouterContext) => {
+  if (ctx.params.latitude) {
+    latitude = ctx.params.latitude;
+    longitude = ctx.params.longitude;
+    elevation = ctx.params.elevation;
+  }
   try {
-    const body = await fetchWindsAloftData();
+    const body = await fetchWindsAloftData(latitude, longitude);
     ctx.response.type = "application/json";
     ctx.response.headers.append(
       "access-control-allow-origin",
-      "http://localhost:1234",
+      "*",
     );
-    ctx.response.body = transformWindsAloftData(body);
+    ctx.response.body = transformWindsAloftData(body, elevation);
   } catch (err) {
     console.error("Error fetching winds aloft:", err);
   }
