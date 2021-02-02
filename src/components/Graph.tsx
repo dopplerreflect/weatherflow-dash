@@ -32,7 +32,7 @@ const Graph: React.FC<WindGraphProps> = function ({ obs_st }) {
       height={'100%'}
     >
       <g id="y-axis-lines">
-        {[...Array.from(Array(25))].map((_, n) => {
+        {[...Array.from(Array(Math.ceil(maxValue)))].map((_, n) => {
           const y = n + 1;
           if (y < maxValue) {
             return (
@@ -131,7 +131,7 @@ const Graph: React.FC<WindGraphProps> = function ({ obs_st }) {
         ))}
       </g>
       <g id="y-axis-legend">
-        {[...Array.from(Array(25))].map((_, n) => {
+        {[...Array.from(Array(Math.ceil(maxValue)))].map((_, n) => {
           const y = n + 1;
           if (
             y < maxValue &&
