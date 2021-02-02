@@ -7,7 +7,7 @@ const ENV = config();
 
 const client = new Client(
   ENV.DEVELOPMENT
-    ? "postgres://app:app@localhost/app"
+    ? "postgres://app:app@127.0.0.1/app"
     : Deno.env.toObject()["DATABASE_URL"],
 );
 
