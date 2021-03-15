@@ -6,7 +6,8 @@ import {
 } from "https://deno.land/std@0.69.0/ws/mod.ts";
 
 import type { WfData, WfMessageObj } from "./types.d.ts";
-import { getCache, setCache } from "./database.ts";
+// import { getCache, setCache } from "./database.ts";
+import { getCache, setCache } from "./memoryCache.ts";
 
 const ENV = config();
 
