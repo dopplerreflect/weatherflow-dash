@@ -6,19 +6,9 @@ import type { WfData } from "./types.d.ts";
 const ENV = config();
 
 const client = new Client(
-  ENV.DEVELOPMENT ? "postgres://app:app@127.0.0.1/app" : {
-    hostname: "ec2-52-21-252-142.compute-1.amazonaws.com",
-    user: "bohunepdbrlspm",
-    password:
-      "5e6f33e963971c692c149d4bf1a6fb022f8a765a3912976e9c7b8bc94a7b3ae8",
-    database: "df04919podboae",
-    port: "5432",
-    //@ts-ignore
-    tls: {
-      enforce: false,
-    },
-  },
-  // : Deno.env.toObject()["DATABASE_URL"],
+  ENV.DEVELOPMENT
+    ? "postgres://app:app@127.0.0.1/app"
+    : Deno.env.toObject()["DATABASE_URL"],
 );
 
 Deno.startTls;
