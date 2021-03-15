@@ -13,7 +13,7 @@ const client = new Client(
       "5e6f33e963971c692c149d4bf1a6fb022f8a765a3912976e9c7b8bc94a7b3ae8",
     database: "df04919podboae",
     port: "5432",
-    //@ts-expect-error
+    //@ts-ignore
     tls: {
       enforce: false,
     },
